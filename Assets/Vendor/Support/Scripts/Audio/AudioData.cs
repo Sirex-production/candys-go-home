@@ -13,7 +13,7 @@ namespace Support.Audio
             if (audioClips.ContainsKey(key))
                 return audioClips[key];
             
-            TemplateUtils.SafeDebug($"Audio data does not contain \"{key}\"");
+            TemplateUtils.SafeLog($"Audio data does not contain \"{key}\"");
             return null;
         }
     }

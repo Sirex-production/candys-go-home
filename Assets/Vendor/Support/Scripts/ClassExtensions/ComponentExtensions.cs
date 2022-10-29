@@ -30,7 +30,7 @@ namespace Support.Extensions
         public static void SafeDebug(this Component component, object objectContent, LogType logType = LogType.Log)
         {
 #if UNITY_EDITOR
-            TemplateUtils.SafeDebug(objectContent, logType);
+            TemplateUtils.SafeLog(objectContent, logType);
 #endif
         }
 
