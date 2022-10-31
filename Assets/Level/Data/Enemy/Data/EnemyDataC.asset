@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0587ee867a014b29b967b04d32680f6b, type: 3}
-  m_Name: EnemyData
+  m_Name: EnemyDataC
   m_EditorClassIdentifier: 
-  damage: 2
-  attackSpeed: 2
-  attackRange: 8
-  attackInterval: 1.2
-  typeOfAttack: 0
-  chaseDetectionRange: 21
-  attackDetectionRange: 10
-  coneOfVision: 120
-  maxHealth: 5
-  movementSpeed: 5
+  attackSpeed: 0.55
+  damage: 3
+  attackRange: 20
+  attackInterval: 0.75
+  typeOfAttack: 1
+  chaseDetectionRange: 50
+  attackDetectionRange: 15
+  coneOfVision: 70
+  maxHealth: 7
+  timeToDie: 0.6
+  movementSpeed: 4

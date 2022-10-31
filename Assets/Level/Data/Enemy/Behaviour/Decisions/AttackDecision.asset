@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: AttackDecision
   m_EditorClassIdentifier: 
   nextState: {fileID: 11400000, guid: ebfa63231cb35bd4c880d616e754671f, type: 2}
+  ignoredMask:
+    serializedVersion: 2
+    m_Bits: 254

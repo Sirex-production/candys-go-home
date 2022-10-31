@@ -13,6 +13,7 @@ namespace Candy.Enemy.Logic.States
 
         protected override void ActOnTick(EnemyActor enemy)
         {
+            enemy.EnemyAnimator.PlayWalk();
             var navAgent = enemy.NavMeshAgent;
             navAgent.SetDestination(enemy.target.position);
             navAgent.speed = enemy.Config.MovementSpeed;

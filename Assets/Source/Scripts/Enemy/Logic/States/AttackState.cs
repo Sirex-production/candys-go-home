@@ -13,14 +13,18 @@ namespace Candy.Enemy.Logic.States
         protected override void ActonOnStart(EnemyActor enemy)
         {
             enemy.EnemyAttack.IsAlreadyUsed = false;
+            enemy.LockOnTarget();
         }
 
         protected override void ActOnTick(EnemyActor enemy)
         {
+
+        
             if (enemy.EnemyAttack.IsAlreadyUsed)
             {
                 return;
             }
+            enemy.EnemyAnimator.PlayAttack();
             enemy.EnemyAttack.Attack();
         }
 
@@ -31,6 +35,10 @@ namespace Candy.Enemy.Logic.States
 
         protected override bool CheckIfBlocked(EnemyActor enemyActor)
         {
+            if (enemyActor.IsDead)
+            {
+                return false;
+            }
             return enemyActor.EnemyAttack.IsAttackActionRunning();
         }
     }

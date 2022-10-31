@@ -7,9 +7,18 @@ namespace Candy.Enemy.Logic.Decisions
     [CreateAssetMenu(menuName = "Enemy/Decision/Chase")]
     public sealed class ChaseDecision : DecisionBase
     {
+        [SerializeField]
+        private LayerMask ignoredMask;
         public override bool ShouldChangeState(EnemyActor enemy)
         {
-            return enemy.IsTargetDetected() && !enemy.IsTargetInAttackRange;
+            var decision = enemy.IsTargetDetected() && !enemy.IsTargetInAttackRange;
+            return decision;
+            /*if (!decision)
+            {
+                return false;
+            }
+            return  !Physics.Linecast(enemy.transform.position, enemy.target.position, ignoredMask, QueryTriggerInteraction.Ignore);    */
+
         }
     }
 }

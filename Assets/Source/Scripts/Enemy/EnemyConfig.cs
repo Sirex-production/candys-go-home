@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 namespace Candy.Enemy
 {
@@ -12,14 +13,17 @@ namespace Candy.Enemy
     {
 
         //--------- Attack ----------
+        
+      
         [Header("Attack")]
         [SerializeField] 
         [Min(0)]
-        private float damage;
+        private float attackSpeed;
         
         [SerializeField] 
         [Min(0)]
-        private float attackSpeed;
+        [ShowIf("IsMelee")]
+        private float damage;
         
         [SerializeField] 
         [Min(0)]
@@ -52,6 +56,11 @@ namespace Candy.Enemy
         [Min(0)]
         private float maxHealth;
         
+        [Header("Health")]
+        [SerializeField] 
+        [Min(0)]
+        private float timeToDie;
+        
         //--------- Movement ----------
         [Header("Health")]
         [SerializeField] 
@@ -77,6 +86,11 @@ namespace Candy.Enemy
         
         public float ConeOfVision => coneOfVision;
 
+        public float TimeToDie => timeToDie;
+
         public TypeOfAttack TypeOfAttack => typeOfAttack;
+        private bool IsMelee() => TypeOfAttack == TypeOfAttack.Melee;
+        
+        
     }
 }

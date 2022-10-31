@@ -2,6 +2,7 @@
 
 namespace Candy.Support
 {
+#if UNITY_EDITOR
     public sealed class SphereVisualizer : MonoBehaviour
     {
         [SerializeField] [Range(0, 10)] private float radius = 1;  
@@ -12,4 +13,5 @@ namespace Candy.Support
             Gizmos.DrawSphere(transform.position, radius);
         }
     }
+#endif
 }
