@@ -15,11 +15,17 @@ namespace Candy.Gunplay
 		private PcInputService _pcInputService;
 		private IInventoryService _inventoryService;
 
+		private bool _isAbleToAttack = true;
 		private int _currentWeaponIndex = 0;
 		private bool _isHoldingMelee = false;
 		private float _secondsPassedFromLastAttack = 0f;
 
-		private bool CanPerformMeleeAttack => _secondsPassedFromLastAttack > inventoryConfig.PauseBetweenMeleeSlashes;
+		public bool IsAbleToAttack
+		{
+			get => _isAbleToAttack;
+			set => _isAbleToAttack = value;
+		}
+		private bool CanPerformMeleeAttack => _secondsPassedFromLastAttack > inventoryConfig.PauseBetweenMeleeSlashes && _isHoldingMelee;
 		private bool CanPerformShotFromCurrentWeapon
 		{
 			get
@@ -28,7 +34,7 @@ namespace Candy.Gunplay
 				bool enoughTimeHasPassed = _secondsPassedFromLastAttack >
 				                           inventoryConfig.GetWeaponData(_currentWeaponIndex).pauseBetweenShots;
 
-				return hasEnoughAmmunition && enoughTimeHasPassed;
+				return hasEnoughAmmunition && enoughTimeHasPassed && !_isHoldingMelee;
 			}
 		}
 
@@ -52,7 +58,7 @@ namespace Candy.Gunplay
 
 		private void Start()
 		{
-			OnWeaponSwitch(true);
+			OnMeleeWeaponSwitch();
 		}
 
 		private void Update()
@@ -68,10 +74,12 @@ namespace Candy.Gunplay
 
 		private void OnAttackInput()
 		{
-			if (_isHoldingMelee && CanPerformMeleeAttack)
+			if(!_isAbleToAttack)
+				return;
+			
+			if (CanPerformMeleeAttack)
 			{
 				_secondsPassedFromLastAttack = 0f;
-				
 				OnAttackPerformed?.Invoke(-1);
 				return;
 			}
@@ -79,7 +87,6 @@ namespace Candy.Gunplay
 			if (CanPerformShotFromCurrentWeapon)
 			{
 				_secondsPassedFromLastAttack = 0f;
-				
 				OnAttackPerformed?.Invoke(_currentWeaponIndex);
 			}
 		}

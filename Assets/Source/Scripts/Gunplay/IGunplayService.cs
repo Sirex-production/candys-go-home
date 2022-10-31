@@ -7,5 +7,7 @@ namespace Candy.Gunplay
 		public event Action<int> OnWeaponSwitched;
 		public event Action OnMeleeWeaponSwitched;
 		public event Action<int> OnAttackPerformed;
+
+		public bool IsAbleToAttack { get; set; }
 	}
 }
