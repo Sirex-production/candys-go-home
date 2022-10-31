@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using Candy.Actors;
+using Candy.Projectile;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 
 namespace Candy.Enemy
 {
@@ -10,8 +12,16 @@ namespace Candy.Enemy
         [SerializeField] 
         [Required]
         private EnemyActor enemyActor;
+
+        private IProjectileService _projectileService;
         private Coroutine _attackCoroutine;
         private bool _isAlreadyUsed = false;
+        
+        [Inject]
+        private void Construct( IProjectileService projectileService)
+        {
+            _projectileService = projectileService;
+        }
         
         public bool IsAlreadyUsed
         {
@@ -53,7 +63,9 @@ namespace Candy.Enemy
         
         private IEnumerator PerformRangeAttackCoroutine()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(enemyActor.Config.AttackSpeed);
+            _projectileService.SpawnProjectile(0, transform.position, transform.forward ,false);
+            yield return new WaitForSeconds(enemyActor.Config.AttackInterval);
             _attackCoroutine = null;
         }
     }

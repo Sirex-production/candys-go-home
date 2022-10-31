@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: ChaseDecision
   m_EditorClassIdentifier: 
   nextState: {fileID: 11400000, guid: 5fcb74c1ca219b54bbda60c38f2586ae, type: 2}
+  ignoredMask:
+    serializedVersion: 2
+    m_Bits: 254
