@@ -32,6 +32,10 @@ namespace Candy.Enemy
 
         [SerializeField] 
         [Required]
+        private BehaviorAgent behaviorAgent;
+        
+        [SerializeField] 
+        [Required]
         private EnemyAttack enemyAttack;
         
         [SerializeField] 
@@ -41,6 +45,9 @@ namespace Candy.Enemy
         [SerializeField] 
         [Required] 
         private EnemyDetection attackTrigger ;
+
+        [SerializeField]
+        private EnemyAnimator enemyAnimator;
         
         
         // -------- detecting ----------
@@ -55,6 +62,7 @@ namespace Candy.Enemy
         [SerializeField] 
         public Transform target;
         
+        private float _timeToDie;
         // -------- 
         private bool _isDead = false;
         // --------
@@ -63,11 +71,23 @@ namespace Candy.Enemy
 
         public EnemyAttack EnemyAttack => enemyAttack;
 
+        public EnemyAnimator EnemyAnimator => enemyAnimator;
+
+        public BehaviorAgent BehaviorAgent => behaviorAgent;
+
+        public float TimeToDie
+        {
+            get => _timeToDie;
+            set => _timeToDie = value;
+        }
+
         public bool IsTargetDetected()
         {
             var dir = target.position - transform.position;
             dir.y = 0;
             var deltaAngle = Vector3.Angle(dir, transform.forward);
+            
+            //angle
             if (deltaAngle >= config.ConeOfVision || deltaAngle < 0)
             {
                 return false;
@@ -97,7 +117,21 @@ namespace Candy.Enemy
             detectionZone.radius = config.ChaseDetectionRange;
             attackZone.radius = config.AttackDetectionRange;
             
-            actorHealth.OnDie += () => _isDead = true;
+            actorHealth.OnDie += () =>
+            {
+                _isDead = true;
+            };
+        }
+
+        public void ReleaseToPool()
+        {
+            _enemySpawnerService.ResetEnemy(this);
+            this.gameObject.SetActive(false);
+        }
+
+        public void LockOnTarget()
+        {
+            transform.LookAt(target);
         }
     }
 }

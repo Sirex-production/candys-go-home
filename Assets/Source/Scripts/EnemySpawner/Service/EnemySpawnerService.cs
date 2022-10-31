@@ -59,6 +59,7 @@ namespace Candy.Spawner.Service
         {
             var pref = enemyCategoryConfig.TypeOfEnemies[id];
             var enemy = _diContainer.InstantiatePrefabForComponent<EnemyActor>(pref);
+            enemy.BehaviorAgent.ResetBehaviour();
             return enemy;
         }
 

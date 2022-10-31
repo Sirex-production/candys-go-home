@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Candy.Actors;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -39,7 +40,14 @@ namespace Candy.Enemy
         //todo fill attack script
         private IEnumerator PerformMeleeAttackCoroutine()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(enemyActor.Config.AttackSpeed);
+            Collider[] hitColliders = new Collider[1];
+            int amountOfHitColliders = Physics.OverlapSphereNonAlloc(transform.position, enemyActor.Config.AttackRange,hitColliders, LayerMask.GetMask("Player"), QueryTriggerInteraction.Collide);
+            if (amountOfHitColliders>0 && enemyActor.target.root.TryGetComponent<ActorHealth>(out var playerHealth))
+            {
+                playerHealth.TakeDamage(enemyActor.Config.Damage);
+            }
+            yield return new WaitForSeconds(enemyActor.Config.AttackInterval);
             _attackCoroutine = null;
         }
         

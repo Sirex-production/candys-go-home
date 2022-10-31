@@ -27,6 +27,11 @@ namespace Candy.Enemy
         {
             _currentState = _currentState.Tick(actor);
         }
+
+        public void ResetBehaviour()
+        {
+            _currentState = startingState;
+        }
     }
 
 }
