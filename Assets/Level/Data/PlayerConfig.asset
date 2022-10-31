@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc9ef2c77404c17bca8f49cf181339d, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 15
   rotationSpeed: 40
   accelerationSpeed: 20
   mass: 50
-  jumpForce: 12
+  jumpForce: 15
   maxHp: 100

@@ -11,6 +11,7 @@ namespace Support.Input
         private readonly PcInputActions _pcInputActions;
         
         private readonly InputAction _console;
+        private readonly InputAction _escape;
         private readonly InputAction _movementHorizontal;
         private readonly InputAction _movementVertical;
         private readonly InputAction _jump;
@@ -23,7 +24,8 @@ namespace Support.Input
         private readonly InputAction _meleeWeapon;
 
         private bool _isEnabled = false;
-        
+
+        public event Action OnEscapeInputReceived;
         public event Action OnConsoleInputReceived;
         public event Action<Vector2> OnMoveInput;
         public event Action OnJumpInput;
@@ -31,6 +33,7 @@ namespace Support.Input
         public event Action<Vector2> OnDeltaRotationInput;
         public event Action OnInteractInput;
         public event Action OnAttackInput;
+
         /// <summary>
         /// bool identifies whether next weapon was selected. true - next weapon. false - previous weapon
         /// </summary>
@@ -55,6 +58,7 @@ namespace Support.Input
             _pcInputActions = new PcInputActions();
             IsEnabled = true;
 
+            _escape = _pcInputActions.Utilities.Escape;
             _console = _pcInputActions.Utilities.Console;
             _movementHorizontal = _pcInputActions.Movement.Horizontal;
             _movementVertical = _pcInputActions.Movement.Vertical;
@@ -82,6 +86,9 @@ namespace Support.Input
         {
             if(_console.WasPerformedThisFrame())
                 OnConsoleInputReceived?.Invoke();
+            
+            if(_escape.WasPerformedThisFrame())
+                OnEscapeInputReceived?.Invoke();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
