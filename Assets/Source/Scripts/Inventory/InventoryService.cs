@@ -22,6 +22,8 @@ namespace Candy.Inventory
 			_currentAmountOfAmmunition = new int[inventoryConfig.AmountOfWeapons];
 			
 			PickUpWeapon(0);
+			PickUpWeapon(1);
+			PickUpWeapon(2);
 		}
 
 		public void PickUpWeapon(int weaponId)

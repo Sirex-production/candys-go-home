@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponData:
   - pauseBetweenShots: 0.1
     recoilStrength: 2
-  - pauseBetweenShots: 0.5
-    recoilStrength: 0
-  - pauseBetweenShots: 0.1
-    recoilStrength: 0
+  - pauseBetweenShots: 0.01
+    recoilStrength: 0.5
+  - pauseBetweenShots: 1.5
+    recoilStrength: 50
