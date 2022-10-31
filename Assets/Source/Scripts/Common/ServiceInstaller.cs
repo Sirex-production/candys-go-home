@@ -1,4 +1,6 @@
-﻿using Support;
+﻿using Candy.Player;
+using Support;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -6,9 +8,11 @@ namespace Candy.Common
 {
 	public sealed class ServiceInstaller : MonoInstaller
 	{
+		[SerializeField] private PlayerService playerService;
+		
 		public override void InstallBindings()
 		{
-			base.InstallBindings();
+			BindService<PlayerService, NullPlayerService, IPlayerService>(playerService);
 		}
 		
 		private void BindService<TRealImplementation, TNullImplementation, TServiceInterface>(TRealImplementation realImplementation) 
