@@ -27,6 +27,10 @@ namespace Candy.Inventory
 
 		private void Start()
 		{
+			AddAmmunition(0, 30);
+			AddAmmunition(1, 100);
+			AddAmmunition(1, 3);
+			
 			OnWeaponsUpdated?.Invoke(_currentWeapons);
 		}
 
