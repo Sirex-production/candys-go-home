@@ -284,7 +284,6 @@ MonoBehaviour:
   hudVCam: {fileID: 5048927621332166324}
   bobbingStrength: 0.01
   bobbingSpeed: 15
-  recoilLerpSpeed: 50
   recoilStabilizationSpeed: 10
 --- !u!1 &5048927620686663765
 GameObject:
@@ -1085,7 +1084,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2a909ccc24ee9244ba655ea81c885999, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dabbf45f2132ed6459bb5192a39effd7, type: 2}
+      objectReference: {fileID: 2100000, guid: 107fa36093f6a36478cbe7e594890eb2, type: 2}
     - target: {fileID: 919132149155446097, guid: 2a909ccc24ee9244ba655ea81c885999, type: 3}
       propertyPath: m_Name
       value: Brush

@@ -1,6 +1,7 @@
-﻿using Candy.Gunplay;
-using DG.Tweening;
+﻿using DG.Tweening;
 using NaughtyAttributes;
+using Support.Extensions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,43 +11,47 @@ namespace Candy.GameplayUi
 	public sealed class UiCombatDisplay : MonoBehaviour
 	{
 		[BoxGroup("References")]
+		[Required, SerializeField] private Image brushIcon;
+		[BoxGroup("References")]
 		[SerializeField] private Image[] weaponIcons;
+		[BoxGroup("References")]
+		[Required, SerializeField] private TMP_Text ammoText;
 		[BoxGroup("Animation properties")]
 		[SerializeField] [Min(0)] private float fadeAnimationDuration = .3f;
 		
 		private IUiGameplayService _uiGameplayService;
-		private IGunplayService _gunplayService;
-		
+
 		[Inject]
-		private void Construct(IUiGameplayService uiGameplayService, IGunplayService gunplayService)
+		private void Construct(IUiGameplayService uiGameplayService)
 		{
 			_uiGameplayService = uiGameplayService;
-			_gunplayService = gunplayService;
 		}
 
 		private void Awake()
 		{
 			_uiGameplayService.OnInventoryUiWeaponsUpdateRequested += OnInventoryUiWeaponsUpdateRequested;
-			_gunplayService.OnWeaponSwitched += OnWeaponSwitched;
-			_gunplayService.OnMeleeWeaponSwitched += OnMeleeWeaponSwitched;
+			_uiGameplayService.OnWeaponSwitchUiUpdateRequested += OnWeaponSwitchUiUpdateRequested;
+			_uiGameplayService.OnCurrentAmountOfAmmoUiUpdateRequested += OnCurrentAmountOfAmmoUiUpdateRequested;
 		}
 
 		private void OnDestroy()
 		{
 			_uiGameplayService.OnInventoryUiWeaponsUpdateRequested -= OnInventoryUiWeaponsUpdateRequested;
-			_gunplayService.OnWeaponSwitched -= OnWeaponSwitched;
-			_gunplayService.OnMeleeWeaponSwitched -= OnMeleeWeaponSwitched;
+			_uiGameplayService.OnWeaponSwitchUiUpdateRequested -= OnWeaponSwitchUiUpdateRequested;
+			_uiGameplayService.OnCurrentAmountOfAmmoUiUpdateRequested -= OnCurrentAmountOfAmmoUiUpdateRequested;
 		}
 
-		private void OnMeleeWeaponSwitched()
+		private void OnWeaponSwitchUiUpdateRequested(int weaponIndex)
 		{
-			OnWeaponSwitched(-1);
-		}
+			if (weaponIndex < 0)
+			{
+				brushIcon.DOFade(1, fadeAnimationDuration);
+				return;
+			}
 
-		private void OnWeaponSwitched(int weaponIndex)
-		{
-			weaponIndex += 1;
-			
+			brushIcon.DOFade(.3f, fadeAnimationDuration);
+
+
 			for (int i = 0; i < weaponIcons.Length; i++)
 			{
 				var weaponIcon = weaponIcons[i];
@@ -63,8 +68,17 @@ namespace Candy.GameplayUi
 
 		private void OnInventoryUiWeaponsUpdateRequested(bool[] weaponsInInventory)
 		{
+			brushIcon.SetGameObjectActive();
+			
 			for (int i = 0; i < weaponsInInventory.Length; i++)
 				weaponIcons[i].gameObject.SetActive(weaponsInInventory[i]);
+		}
+
+		private void OnCurrentAmountOfAmmoUiUpdateRequested(int amountOfAmmo)
+		{
+			string targetText = amountOfAmmo < 0 ? "INFINITE" : $"{amountOfAmmo}";;
+
+			ammoText.SetText($"AMMO: {targetText}");
 		}
 	}
 }

@@ -51,7 +51,7 @@ namespace Candy.Player
 		{
 			health = Mathf.Max(0, health);
 			_currentHp += health;
-			_currentHp = Mathf.Max(_currentHp, playerConfig.MaxHp);
+			_currentHp = Mathf.Min(_currentHp, playerConfig.MaxHp);
 			
 			OnHealthUpdated?.Invoke(Mathf.InverseLerp(0, playerConfig.MaxHp, _currentHp));
 		}

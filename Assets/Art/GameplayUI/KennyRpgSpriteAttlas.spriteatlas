@@ -119,6 +119,10 @@ SpriteAtlas:
     - {fileID: 2800000, guid: cc366d84ccfb29c429e781756e2512bd, type: 3}
     - {fileID: 2800000, guid: 6615f1b0c06f9814da5c0bcf15742990, type: 3}
     - {fileID: 2800000, guid: c7e0efc4cd44d2f4ea141866168f2462, type: 3}
+    - {fileID: 2800000, guid: 56bf23f4e030632489e8dae17fc811af, type: 3}
+    - {fileID: 2800000, guid: 932d1b90337a15b45ba3129b1a4d9517, type: 3}
+    - {fileID: 2800000, guid: 5cc9879fbe343d746b91c38efbaea28c, type: 3}
+    - {fileID: 2800000, guid: 50ce4ebfd420a7048b157ee0fa772a2e, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -128,6 +132,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 191fd610261de82498a7a15dde41e252, type: 3}
   - {fileID: 21300000, guid: cf8c5470cd79c344f8a5d58738eab95f, type: 3}
   - {fileID: 21300000, guid: ce94fe80e6f9a5c47b2d253c5c424220, type: 3}
+  - {fileID: 21300000, guid: 932d1b90337a15b45ba3129b1a4d9517, type: 3}
   - {fileID: 21300000, guid: d1e6a5a00e4c00046a8efb9a45cc537a, type: 3}
   - {fileID: 21300000, guid: 6615f1b0c06f9814da5c0bcf15742990, type: 3}
   - {fileID: 21300000, guid: a24936b031e1dde4a839f089e19ec21d, type: 3}
@@ -146,6 +151,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d1645984453579b4daafb7c20a952989, type: 3}
   - {fileID: 21300000, guid: cc366d84ccfb29c429e781756e2512bd, type: 3}
   - {fileID: 21300000, guid: c7e0efc4cd44d2f4ea141866168f2462, type: 3}
+  - {fileID: 21300000, guid: 56bf23f4e030632489e8dae17fc811af, type: 3}
   - {fileID: 21300000, guid: d2be9ff4403b08043861c997c75470e6, type: 3}
   - {fileID: 21300000, guid: 67a23a35202928949b57d93e0d535c59, type: 3}
   - {fileID: 21300000, guid: e882b885b27ecfb4daea7c1593cfde08, type: 3}
@@ -210,12 +216,15 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a2d3d81f942d4584bbe71c7dd0ae0af6, type: 3}
   - {fileID: 21300000, guid: 8ab0ec6f7c07a0d4e877e88cbb72b6bf, type: 3}
   - {fileID: 21300000, guid: a69e7e6fa7dfe384787ada153e36b8c5, type: 3}
+  - {fileID: 21300000, guid: 5cc9879fbe343d746b91c38efbaea28c, type: 3}
+  - {fileID: 21300000, guid: 50ce4ebfd420a7048b157ee0fa772a2e, type: 3}
   - {fileID: 21300000, guid: 711accff122b38a4b950ebf1e3e184e4, type: 3}
   m_PackedSpriteNamesToIndex:
   - buttonSquare_beige_pressed
   - buttonLong_blue_pressed
   - barBack_horizontalRight
   - arrowBeige_left
+  - weapon_lighter
   - cursorSword_bronze
   - panelInset_blue
   - barRed_horizontalLeft
@@ -234,6 +243,7 @@ SpriteAtlas:
   - barYellow_horizontalLeft
   - panelInset_beigeLight
   - panelInset_brown
+  - weapon_brush
   - barRed_verticalBottom
   - barYellow_horizontalMid
   - barRed_horizontalMid
@@ -298,6 +308,8 @@ SpriteAtlas:
   - iconCircle_brown
   - buttonSquare_blue_pressed
   - buttonSquare_brown_pressed
+  - weapon_nerfgun
+  - weapon_shotgun
   - barYellow_verticalMid
   m_RenderDataMap: {}
   m_Tag: KennyRpgSpriteAttlas
