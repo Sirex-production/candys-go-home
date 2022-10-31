@@ -30,6 +30,7 @@ namespace Candy.Player
 		private float _currentRotationX;
 		private float _currentMovementSpeed;
 		private bool _isCustomJumpRequested;
+		private float _sensitivity;
 		
 		[SerializeField] [ReadOnly] private Vector3 _targetDirection;
 		[SerializeField] [ReadOnly] private Vector3 _currentOffset;
@@ -62,6 +63,7 @@ namespace Candy.Player
 
 		private void Awake()
 		{
+			_sensitivity = PlayerPrefs.GetFloat("sensitivity", 1);
 			_currentMovementSpeed = playerConfig.MovementSpeed;
 			_targetTransform = characterController.transform;
 
@@ -114,7 +116,7 @@ namespace Candy.Player
 			if(delta.sqrMagnitude < .001f)
 				return;
 			
-			var offset = delta * (playerConfig.RotationSpeed * Time.deltaTime);
+			var offset = delta * (_sensitivity*playerConfig.RotationSpeed * Time.deltaTime);
 
 			_currentRotationX -= offset.y;
 			_currentRotationX = Mathf.Clamp(_currentRotationX, -90, 90);

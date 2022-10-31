@@ -2,6 +2,7 @@
 using Candy.GameplayUi;
 using Candy.Gunplay;
 using Candy.Inventory;
+using Candy.LoadingUi;
 using Candy.Menu;
 using Candy.Player;
 using Candy.Projectile;
@@ -27,6 +28,7 @@ namespace Candy.Common
 		[SerializeField] private UiGameplayService uiGameplayService;
 		[SerializeField] private WaveService waveService;
 		[SerializeField] private MainMenuService menuService;
+		[SerializeField] private UiLoadingService uiLoadingService;
 		
 		
 		public override void InstallBindings()
@@ -41,6 +43,7 @@ namespace Candy.Common
 			BindService<UiGameplayService, NullUiGameplayService, IUiGameplayService>(uiGameplayService);
 			BindService<WaveService,NullWaveService,IWaveService>(waveService);
 			BindService<MainMenuService,NullMenuService,IMenuService>(menuService);
+
 		}
 		
 		private void BindService<TRealImplementation, TNullImplementation, TServiceInterface>(TRealImplementation realImplementation) 

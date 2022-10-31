@@ -18,6 +18,7 @@ namespace Candy.Enemy.Logic.States
             navAgent.SetDestination(enemy.target.position);
             navAgent.speed = enemy.Config.MovementSpeed;
             navAgent.isStopped = false;
+            
         }
 
         protected override void ActonOnFinish(EnemyActor enemy)
