@@ -10,6 +10,6 @@ namespace Candy.Enemy.Logic.Base
         private StateBase nextState;
         public StateBase NextState => nextState;
 
-        public abstract bool ShouldChangeState(Darek enemy);
+        public abstract bool ShouldChangeState(EnemyActor enemy);
     }
 }

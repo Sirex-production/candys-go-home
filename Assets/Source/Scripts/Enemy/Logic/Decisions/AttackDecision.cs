@@ -1,12 +1,15 @@
 ﻿using Candy.Enemy.Logic.Base;
+using UnityEngine;
 
 namespace Candy.Enemy.Logic.Decisions
 {
-    public class AttackDecision : DecisionBase
+    [CreateAssetMenu(menuName = "Enemy/Decision/Attack")]
+    public sealed class AttackDecision : DecisionBase
     {
-        public override bool ShouldChangeState(Darek enemy)
+  
+        public override bool ShouldChangeState(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+            return enemy.IsTargetDetected && enemy.IsTargetInAttackRange;
         }
     }
 }

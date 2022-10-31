@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Candy.Enemy.Logic.Decisions
 {
-    [CreateAssetMenu(menuName = "Enemy/Decision/Chase")]
-    public sealed class ChaseDecision : DecisionBase
+    [CreateAssetMenu(menuName = "Enemy/Decision/Idle")]
+    public class IdleDecision : DecisionBase
     {
         public override bool ShouldChangeState(EnemyActor enemy)
         {
-            return enemy.IsTargetDetected && !enemy.IsTargetInAttackRange;
+            return !(enemy.IsTargetDetected || enemy.IsTargetInAttackRange);
         }
     }
 }

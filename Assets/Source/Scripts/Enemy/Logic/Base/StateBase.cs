@@ -6,14 +6,16 @@ namespace Candy.Enemy.Logic.Base
     public abstract class StateBase : ScriptableObject
     {
 
+        
         [SerializeField] 
         private List<DecisionBase> decisions;
-        protected abstract void ActonOnStart(Darek enemy);
-        protected abstract void ActOnTick(Darek enemy);
-        protected abstract void ActonOnFinish(Darek enemy);
+        protected abstract void ActonOnStart(EnemyActor enemy);
+        protected abstract void ActOnTick(EnemyActor enemy);
+        protected abstract void ActonOnFinish(EnemyActor enemy);
 
-        private Dictionary<Darek, bool> _enemiesStateVisiting = new(); 
-        public StateBase Tick(Darek enemy)
+        private Dictionary<EnemyActor, bool> _enemiesStateVisiting = new(); 
+        
+        public StateBase Tick(EnemyActor enemy)
         {
             if (!_enemiesStateVisiting.ContainsKey(enemy))
             {

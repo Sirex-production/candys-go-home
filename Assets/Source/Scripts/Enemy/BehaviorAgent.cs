@@ -8,15 +8,25 @@ namespace Candy.Enemy
 {
     public sealed class BehaviorAgent : MonoBehaviour
     {
+        [SerializeField] 
+        [Required] 
+        private EnemyActor actor;
+        
         [SerializeField]
         [Required]
-        private StateBase currentState;
+        private StateBase startingState;
+        
+        private StateBase _currentState;
 
+        private void Start()
+        {
+            _currentState = startingState;
+        }
         
-        
+
         private void Update()
         {
-            //currentState = currentState.Tick();
+            _currentState = _currentState.Tick(actor);
         }
     }
 

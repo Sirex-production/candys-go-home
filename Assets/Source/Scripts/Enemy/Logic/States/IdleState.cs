@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace Candy.Enemy.Logic.States
 {
-    [CreateAssetMenu(menuName = "Enemy/State/Attack")]
-    public sealed class AttackState : StateBase
+    [CreateAssetMenu(menuName = "Enemy/State/Idle")]
+    public sealed class IdleState : StateBase
     {
         protected override void ActonOnStart(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+            enemy.NavMeshAgent.isStopped = true;
         }
 
         protected override void ActOnTick(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         protected override void ActonOnFinish(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
