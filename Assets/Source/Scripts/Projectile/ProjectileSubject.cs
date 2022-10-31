@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Candy.Gunplay
+namespace Candy.Projectile
 {
 	public sealed class ProjectileSubject : MonoBehaviour
 	{

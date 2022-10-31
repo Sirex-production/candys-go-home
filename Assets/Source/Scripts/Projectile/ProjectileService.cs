@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
-namespace Candy.Gunplay
+namespace Candy.Projectile
 {
 	public sealed class ProjectileService : MonoBehaviour, IProjectileService
 	{

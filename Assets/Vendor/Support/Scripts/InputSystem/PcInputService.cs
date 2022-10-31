@@ -18,6 +18,8 @@ namespace Support.Input
         private readonly InputAction _deltaRotation;
         private readonly InputAction _interact;
         private readonly InputAction _attack;
+        private readonly InputAction _nextWeapon;
+        private readonly InputAction _previousWeapon;
 
         private bool _isEnabled = false;
         
@@ -28,6 +30,10 @@ namespace Support.Input
         public event Action<Vector2> OnDeltaRotationInput;
         public event Action OnInteractInput;
         public event Action OnAttackInput;
+        /// <summary>
+        /// bool identifies whether next weapon was selected. true - next weapon. false - previous weapon
+        /// </summary>
+        public event Action<bool> OnWeaponSwitch;
 
         public bool IsEnabled
         {
@@ -55,6 +61,8 @@ namespace Support.Input
             _deltaRotation = _pcInputActions.Rotation.Delta;
             _interact = _pcInputActions.Interaction.Interact;
             _attack = _pcInputActions.Combat.Attack;
+            _nextWeapon = _pcInputActions.Combat.NextWeapon;
+            _previousWeapon = _pcInputActions.Combat.PreviousWeapon;
         }
 
         public void Tick()
@@ -107,6 +115,12 @@ namespace Support.Input
         {
             if(_attack.IsPressed())
                 OnAttackInput?.Invoke();
+            
+            if(_nextWeapon.WasPerformedThisFrame())
+                OnWeaponSwitch?.Invoke(true);
+            
+            if(_previousWeapon.WasPerformedThisFrame())
+                OnWeaponSwitch?.Invoke(false);
         }
     }
 }

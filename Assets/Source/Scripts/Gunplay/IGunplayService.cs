@@ -1,6 +1,6 @@
 ﻿namespace Candy.Player
 {
-	public interface IPlayerService
+	public interface IGunplayService
 	{
 		
 	}

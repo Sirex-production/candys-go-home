@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Candy.Gunplay
+namespace Candy.Projectile
 {
 	public sealed class NullProjectileService : IProjectileService
 	{

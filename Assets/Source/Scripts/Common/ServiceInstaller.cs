@@ -1,5 +1,6 @@
 ﻿using Candy.Gunplay;
 using Candy.Player;
+using Candy.Projectile;
 using Support;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,12 +10,12 @@ namespace Candy.Common
 {
 	public sealed class ServiceInstaller : MonoInstaller
 	{
-		[SerializeField] private PlayerService playerService;
+		[SerializeField] private GunplayService gunplayService;
 		[SerializeField] private ProjectileService projectileService;
 		
 		public override void InstallBindings()
 		{
-			BindService<PlayerService, NullPlayerService, IPlayerService>(playerService);
+			BindService<GunplayService, NullGunplayService, IGunplayService>(gunplayService);
 			BindService<ProjectileService, NullProjectileService, IProjectileService>(projectileService);
 		}
 		

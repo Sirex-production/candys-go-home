@@ -1,7 +1,7 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
 
-namespace Candy.Gunplay
+namespace Candy.Projectile
 {
 	[RequireComponent(typeof(Rigidbody))]
 	public sealed class ProjectileInteraction : MonoBehaviour

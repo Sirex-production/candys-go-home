@@ -197,6 +197,24 @@ namespace Support.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""045759c4-9199-4dc0-b406-64b42dd5ed2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""690dd25f-0cd3-402b-8859-74e159647a47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -208,6 +226,28 @@ namespace Support.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dfa5513-9d9a-4078-be8d-ef5139ffece6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6372a4fc-be13-4324-af7f-d30c47e86ae5"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -284,6 +324,8 @@ namespace Support.Input
             // Combat
             m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
             m_Combat_Attack = m_Combat.FindAction("Attack", throwIfNotFound: true);
+            m_Combat_NextWeapon = m_Combat.FindAction("NextWeapon", throwIfNotFound: true);
+            m_Combat_PreviousWeapon = m_Combat.FindAction("PreviousWeapon", throwIfNotFound: true);
             // Interaction
             m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
             m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
@@ -440,11 +482,15 @@ namespace Support.Input
         private readonly InputActionMap m_Combat;
         private ICombatActions m_CombatActionsCallbackInterface;
         private readonly InputAction m_Combat_Attack;
+        private readonly InputAction m_Combat_NextWeapon;
+        private readonly InputAction m_Combat_PreviousWeapon;
         public struct CombatActions
         {
             private @PcInputActions m_Wrapper;
             public CombatActions(@PcInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Attack => m_Wrapper.m_Combat_Attack;
+            public InputAction @NextWeapon => m_Wrapper.m_Combat_NextWeapon;
+            public InputAction @PreviousWeapon => m_Wrapper.m_Combat_PreviousWeapon;
             public InputActionMap Get() { return m_Wrapper.m_Combat; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -457,6 +503,12 @@ namespace Support.Input
                     @Attack.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnAttack;
                     @Attack.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnAttack;
                     @Attack.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnAttack;
+                    @NextWeapon.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnNextWeapon;
+                    @NextWeapon.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnNextWeapon;
+                    @NextWeapon.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnNextWeapon;
+                    @PreviousWeapon.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnPreviousWeapon;
+                    @PreviousWeapon.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnPreviousWeapon;
+                    @PreviousWeapon.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnPreviousWeapon;
                 }
                 m_Wrapper.m_CombatActionsCallbackInterface = instance;
                 if (instance != null)
@@ -464,6 +516,12 @@ namespace Support.Input
                     @Attack.started += instance.OnAttack;
                     @Attack.performed += instance.OnAttack;
                     @Attack.canceled += instance.OnAttack;
+                    @NextWeapon.started += instance.OnNextWeapon;
+                    @NextWeapon.performed += instance.OnNextWeapon;
+                    @NextWeapon.canceled += instance.OnNextWeapon;
+                    @PreviousWeapon.started += instance.OnPreviousWeapon;
+                    @PreviousWeapon.performed += instance.OnPreviousWeapon;
+                    @PreviousWeapon.canceled += instance.OnPreviousWeapon;
                 }
             }
         }
@@ -548,6 +606,8 @@ namespace Support.Input
         public interface ICombatActions
         {
             void OnAttack(InputAction.CallbackContext context);
+            void OnNextWeapon(InputAction.CallbackContext context);
+            void OnPreviousWeapon(InputAction.CallbackContext context);
         }
         public interface IInteractionActions
         {

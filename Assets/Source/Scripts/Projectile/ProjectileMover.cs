@@ -2,7 +2,7 @@
 using Support.Extensions;
 using UnityEngine;
 
-namespace Candy.Gunplay
+namespace Candy.Projectile
 {
 	public sealed class ProjectileMover : MonoBehaviour
 	{

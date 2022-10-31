@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Candy.Enemy
 {
-    public class EnemyManagerService: MonoBehaviour, IPlayerService
+    public class EnemyManagerService: MonoBehaviour, IGunplayService
     {
         [SerializeField] 
         [Required]

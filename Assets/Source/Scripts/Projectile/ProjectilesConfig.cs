@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Candy.Gunplay
+namespace Candy.Projectile
 {
 	[CreateAssetMenu(menuName = "Gunplay/Projectile config")]
 	public sealed class ProjectilesConfig : ScriptableObject
