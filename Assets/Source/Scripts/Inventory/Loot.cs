@@ -10,8 +10,12 @@ namespace Candy.Inventory
 		[BoxGroup("Configs")]
 		[Required, SerializeField] private InventoryConfig inventoryConfig;
 		[BoxGroup("Loot preferences")]
+		[SerializeField] private bool isAmmunition = false;
+		[BoxGroup("Loot preferences"),HideIf(nameof(isAmmunition))]
+		[SerializeField] [Min(0)] private int weaponId = 0;
+		[BoxGroup("Loot preferences"),ShowIf(nameof(isAmmunition))]
 		[SerializeField] [Min(0)] private int ammunitionId = 0;
-		[BoxGroup("Loot preferences")]
+		[BoxGroup("Loot preferences"),ShowIf(nameof(isAmmunition))]
 		[SerializeField] [Min(0)] private int amount = 0;
 
 		private IInventoryService _inventoryService;
@@ -26,7 +30,11 @@ namespace Candy.Inventory
 		{
 			if (other.CompareTag("Player"))
 			{
-				_inventoryService.AddAmmunition(ammunitionId, amount);
+				if(isAmmunition)
+					_inventoryService.AddAmmunition(ammunitionId, amount);
+				else
+					_inventoryService.PickUpWeapon(weaponId);
+				
 				Destroy(gameObject);
 			}
 		}

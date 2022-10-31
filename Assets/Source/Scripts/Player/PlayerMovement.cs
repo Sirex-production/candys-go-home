@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using NaughtyAttributes;
+using Support.Extensions;
 using Support.Input;
 using UnityEngine;
 using Zenject;
@@ -22,10 +23,13 @@ namespace Candy.Player
 		[SerializeField] [Range(0f, 1f)] private float groundCheckingRadius;
 		
 		private PcInputService _pcInputService;
+		private IPlayerService _playerService;
 
 		private Transform _targetTransform;
 		private float _jumpAcceleration;
 		private float _currentRotationX;
+		private float _currentMovementSpeed;
+		private bool _isCustomJumpRequested;
 		
 		[SerializeField] [ReadOnly] private Vector3 _targetDirection;
 		[SerializeField] [ReadOnly] private Vector3 _currentOffset;
@@ -50,24 +54,33 @@ namespace Candy.Player
 		public Vector3 CurrentOffset => _currentOffset;
 		
 		[Inject]
-		private void Construct(PcInputService pcInputService)
+		private void Construct(PcInputService pcInputService, IPlayerService playerService)
 		{
 			_pcInputService = pcInputService;
+			_playerService = playerService;
 		}
 
 		private void Awake()
 		{
+			_currentMovementSpeed = playerConfig.MovementSpeed;
 			_targetTransform = characterController.transform;
 
 			_pcInputService.OnMoveInput += OnMoveInput;
 			_pcInputService.OnJumpInput += OnJumpInput;
 			_pcInputService.OnDeltaRotationInput += OnDeltaRotationInput;
+			
+			_playerService.OnCustomJumpRequested += OnCustomJumpRequested;
+			_playerService.OnSpeedChangeRequested += OnSpeedChangeRequested;
 		}
 
 		private void OnDestroy()
 		{
 			_pcInputService.OnMoveInput -= OnMoveInput;
 			_pcInputService.OnJumpInput -= OnJumpInput;
+			_pcInputService.OnDeltaRotationInput -= OnDeltaRotationInput;
+			
+			_playerService.OnCustomJumpRequested -= OnCustomJumpRequested;
+			_playerService.OnSpeedChangeRequested -= OnSpeedChangeRequested;
 		}
 
 		private void OnMoveInput(Vector2 movementInput)
@@ -114,6 +127,19 @@ namespace Candy.Player
 			hudTransform.localEulerAngles = targetLocalEulerAngles;
 		}
 
+		private void OnCustomJumpRequested(float jumpForce)
+		{
+			_isCustomJumpRequested = true;
+			_gravityForce = jumpForce;
+
+			this.DoAfterNextFrameCoroutine(() => _isCustomJumpRequested = false);
+		}
+
+		private void OnSpeedChangeRequested(float targetSpeed)
+		{
+			_currentMovementSpeed = targetSpeed;
+		}
+
 		private void Update()
 		{
 			ApplyMovement();
@@ -125,7 +151,7 @@ namespace Candy.Player
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void ApplyMovement()
 		{
-			var targetOffset = _targetDirection * playerConfig.MovementSpeed;
+			var targetOffset = _targetDirection * _currentMovementSpeed;
 
 			_currentOffset = Vector3.Lerp(_currentOffset, targetOffset, playerConfig.AccelerationSpeed * Time.deltaTime);
 		}
@@ -141,7 +167,7 @@ namespace Candy.Player
 				return;
 			}
 
-			if (IsGrounded)
+			if (IsGrounded && !_isCustomJumpRequested)
 			{
 				_gravityForce = 0;
 				

@@ -7,6 +7,8 @@ namespace Candy.Inventory
 		public event Action<bool[]> OnWeaponsUpdated;
 		public event Action<int[]> OnAmmunitionUpdated;
 
+		public bool HasGuns { get; }
+
 		public int GetNextWeaponIndex(int currentWeaponIndex);
 		public int GetPreviousWeaponIndex(int currentWeaponIndex);
 		public void PickUpWeapon(int weaponId);

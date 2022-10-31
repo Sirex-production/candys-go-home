@@ -93,6 +93,9 @@ namespace Candy.Gunplay
 
 		private void OnWeaponSwitch(bool isNext)
 		{
+			if(!_inventoryService.HasGuns)
+				return;
+			
 			_secondsPassedFromLastAttack = 100f;
 			_isHoldingMelee = false;
 			_currentWeaponIndex = isNext ?

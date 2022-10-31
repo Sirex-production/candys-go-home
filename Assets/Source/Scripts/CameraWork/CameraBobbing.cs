@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Candy.Player;
 using Cinemachine;
 using NaughtyAttributes;
@@ -18,8 +17,6 @@ namespace Candy.CameraWork
 		[SerializeField] [Range(0, 1f)] private float bobbingStrength = 1f;
 		[BoxGroup("Bobbing properties")]
 		[SerializeField] [Range(0, 20f)] private float bobbingSpeed = 1f;
-		[BoxGroup("Recoil properties")]
-		[SerializeField] [Min(0)] private float recoilLerpSpeed = 10f;
 		[BoxGroup("Recoil properties")]
 		[SerializeField] [Min(0)] private float recoilStabilizationSpeed = 1f;
 

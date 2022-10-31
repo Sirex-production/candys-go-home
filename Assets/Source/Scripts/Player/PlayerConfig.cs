@@ -16,11 +16,15 @@ namespace Candy.Player
 		[SerializeField] [Min(0)] private float mass;
 		[BoxGroup("Movement")]
 		[SerializeField] [Min(0)] private float jumpForce;
+		[BoxGroup("Stats")]
+		[SerializeField] [Min(0)] private float maxHp;
 		
 		public float MovementSpeed => movementSpeed;
 		public float RotationSpeed => rotationSpeed;
 		public float AccelerationSpeed => accelerationSpeed;
 		public float Mass => mass;
 		public float JumpForce => jumpForce;
+
+		public float MaxHp => maxHp;
 	}
 }

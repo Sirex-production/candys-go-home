@@ -8,6 +8,8 @@ namespace Candy.Environment
 	{
 		[BoxGroup("References")]
 		[Required, SerializeField] private ActorHealth attachedHealth;
+		[BoxGroup("References")]
+		[SerializeField] private ParticleSystem destroyParticlesPrefab;
 
 		private void Awake()
 		{
@@ -21,6 +23,9 @@ namespace Candy.Environment
 
 		private void OnDie()
 		{
+			if(destroyParticlesPrefab != null)
+				Instantiate(destroyParticlesPrefab, transform.position, Quaternion.identity);
+			
 			Destroy(gameObject);
 		}
 	}

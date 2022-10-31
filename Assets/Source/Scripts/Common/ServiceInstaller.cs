@@ -1,6 +1,8 @@
 ﻿using Candy.CameraWork;
+using Candy.GameplayUi;
 using Candy.Gunplay;
 using Candy.Inventory;
+using Candy.Player;
 using Candy.Projectile;
 using Candy.Spawner.Service;
 using Candy.VFX;
@@ -19,6 +21,8 @@ namespace Candy.Common
 		[SerializeField] private CameraWorkService cameraWorkService;
 		[SerializeField] private EnemySpawnerService enemySpawnerService;
 		[SerializeField] private VfxService vfxService;
+		[SerializeField] private PlayerService playerService;
+		[SerializeField] private UiGameplayService uiGameplayService;
 		
 		public override void InstallBindings()
 		{
@@ -28,6 +32,8 @@ namespace Candy.Common
 			BindService<CameraWorkService, NullCameraService, ICameraWorkService>(cameraWorkService);
 			BindService<EnemySpawnerService, NullEnemySpawnerService, IEnemySpawnerService>(enemySpawnerService);
 			BindService<VfxService, NullVfxService, IVfxService>(vfxService);
+			BindService<PlayerService, NullPlayerService, IPlayerService>(playerService);
+			BindService<UiGameplayService, NullUiGameplayService, IUiGameplayService>(uiGameplayService);
 		}
 		
 		private void BindService<TRealImplementation, TNullImplementation, TServiceInterface>(TRealImplementation realImplementation) 

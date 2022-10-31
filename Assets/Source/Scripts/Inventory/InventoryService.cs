@@ -9,25 +9,25 @@ namespace Candy.Inventory
 	{
 		[BoxGroup("Configs")]
 		[Required, SerializeField] private InventoryConfig inventoryConfig;
-		
+
+		private bool _hasWeapons = false;
 		private bool[] _currentWeapons;
 		private int[] _currentAmountOfAmmunition;
 
 		public event Action<bool[]> OnWeaponsUpdated;
 		public event Action<int[]> OnAmmunitionUpdated;
 
+		public bool HasGuns => _hasWeapons;
+		
 		private void Awake()
 		{
 			_currentWeapons = new bool[inventoryConfig.AmountOfWeapons];
 			_currentAmountOfAmmunition = new int[inventoryConfig.AmountOfWeapons];
-			
-			PickUpWeapon(0);
-			PickUpWeapon(1);
-			PickUpWeapon(2);
 		}
 
 		public void PickUpWeapon(int weaponId)
 		{
+			_hasWeapons = true;
 			_currentWeapons[weaponId] = true;
 			OnWeaponsUpdated?.Invoke(_currentWeapons);
 		}
@@ -47,7 +47,7 @@ namespace Candy.Inventory
 			_currentAmountOfAmmunition[weaponId] -= amount;
 			OnAmmunitionUpdated?.Invoke(_currentAmountOfAmmunition);
 		}
-		
+
 		public int GetNextWeaponIndex(int currentWeaponIndex)
 		{
 			Assert.IsTrue(currentWeaponIndex > -1 && currentWeaponIndex < _currentWeapons.Length);
