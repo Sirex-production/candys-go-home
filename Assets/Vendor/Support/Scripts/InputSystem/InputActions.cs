@@ -215,6 +215,15 @@ namespace Support.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MeleeWeaponSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""66896a55-a477-495a-a2a1-04533a7d971b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -248,6 +257,28 @@ namespace Support.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PreviousWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e50d539a-ccd5-404d-a031-3daee8676d8a"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeWeaponSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d574a5da-e13f-4208-a372-31cce24e15d4"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeWeaponSwitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,6 +357,7 @@ namespace Support.Input
             m_Combat_Attack = m_Combat.FindAction("Attack", throwIfNotFound: true);
             m_Combat_NextWeapon = m_Combat.FindAction("NextWeapon", throwIfNotFound: true);
             m_Combat_PreviousWeapon = m_Combat.FindAction("PreviousWeapon", throwIfNotFound: true);
+            m_Combat_MeleeWeaponSwitch = m_Combat.FindAction("MeleeWeaponSwitch", throwIfNotFound: true);
             // Interaction
             m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
             m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
@@ -484,6 +516,7 @@ namespace Support.Input
         private readonly InputAction m_Combat_Attack;
         private readonly InputAction m_Combat_NextWeapon;
         private readonly InputAction m_Combat_PreviousWeapon;
+        private readonly InputAction m_Combat_MeleeWeaponSwitch;
         public struct CombatActions
         {
             private @PcInputActions m_Wrapper;
@@ -491,6 +524,7 @@ namespace Support.Input
             public InputAction @Attack => m_Wrapper.m_Combat_Attack;
             public InputAction @NextWeapon => m_Wrapper.m_Combat_NextWeapon;
             public InputAction @PreviousWeapon => m_Wrapper.m_Combat_PreviousWeapon;
+            public InputAction @MeleeWeaponSwitch => m_Wrapper.m_Combat_MeleeWeaponSwitch;
             public InputActionMap Get() { return m_Wrapper.m_Combat; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -509,6 +543,9 @@ namespace Support.Input
                     @PreviousWeapon.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnPreviousWeapon;
                     @PreviousWeapon.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnPreviousWeapon;
                     @PreviousWeapon.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnPreviousWeapon;
+                    @MeleeWeaponSwitch.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMeleeWeaponSwitch;
+                    @MeleeWeaponSwitch.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMeleeWeaponSwitch;
+                    @MeleeWeaponSwitch.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMeleeWeaponSwitch;
                 }
                 m_Wrapper.m_CombatActionsCallbackInterface = instance;
                 if (instance != null)
@@ -522,6 +559,9 @@ namespace Support.Input
                     @PreviousWeapon.started += instance.OnPreviousWeapon;
                     @PreviousWeapon.performed += instance.OnPreviousWeapon;
                     @PreviousWeapon.canceled += instance.OnPreviousWeapon;
+                    @MeleeWeaponSwitch.started += instance.OnMeleeWeaponSwitch;
+                    @MeleeWeaponSwitch.performed += instance.OnMeleeWeaponSwitch;
+                    @MeleeWeaponSwitch.canceled += instance.OnMeleeWeaponSwitch;
                 }
             }
         }
@@ -608,6 +648,7 @@ namespace Support.Input
             void OnAttack(InputAction.CallbackContext context);
             void OnNextWeapon(InputAction.CallbackContext context);
             void OnPreviousWeapon(InputAction.CallbackContext context);
+            void OnMeleeWeaponSwitch(InputAction.CallbackContext context);
         }
         public interface IInteractionActions
         {

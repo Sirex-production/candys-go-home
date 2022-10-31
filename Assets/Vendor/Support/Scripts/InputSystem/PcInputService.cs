@@ -34,6 +34,7 @@ namespace Support.Input
         /// bool identifies whether next weapon was selected. true - next weapon. false - previous weapon
         /// </summary>
         public event Action<bool> OnWeaponSwitch;
+        public event Action<bool> OnMeleeWeaponSwitch;
 
         public bool IsEnabled
         {
