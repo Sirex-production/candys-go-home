@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 namespace Support
 {
-    public class VFXService : MonoBehaviour
+    public class PostProcessingService : MonoBehaviour
     {
         [SerializeField] private PostProcessingPair[] postProcessingPresets;
 

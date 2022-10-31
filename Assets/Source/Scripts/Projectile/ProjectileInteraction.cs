@@ -1,6 +1,8 @@
 ﻿using Candy.Actors;
+using Candy.VFX;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 
 namespace Candy.Projectile
 {
@@ -10,7 +12,15 @@ namespace Candy.Projectile
 		[BoxGroup("References")]
 		[Required, SerializeField] private ProjectileSubject projectileSubject;
 
+		private IVfxService _vfxService;
+		
 		private bool _isReleasedByPlayer;
+
+		[Inject]
+		private void Construct(IVfxService vfxService)
+		{
+			_vfxService = vfxService;
+		}
 
 		private void Awake()
 		{
@@ -28,7 +38,10 @@ namespace Candy.Projectile
 		{
 			if (!other.isTrigger && !other.CompareTag("Player") && !other.CompareTag("Enemy"))
 			{
+				var forwardDirection = transform.forward; 
+				
 				projectileSubject.InteractWithSurface();
+				_vfxService.SpawnBulletDecal(transform.position - forwardDirection, forwardDirection);
 				
 				return;
 			}

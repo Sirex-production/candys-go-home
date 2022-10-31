@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSubject: {fileID: 601781592022062728}
   projectileRigidbody: {fileID: 601781592022062743}
-  speed: 20
+  speed: 50
 --- !u!114 &6242940990324031039
 MonoBehaviour:
   m_ObjectHideFlags: 0
