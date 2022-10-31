@@ -4,8 +4,9 @@ namespace Candy.GameplayUi
 {
 	public interface IUiGameplayService
 	{
-		public event Action<int> OoWeaponSwitchUiUpdateRequested;
+		public event Action<int> OnWeaponSwitchUiUpdateRequested;
 		public event Action<bool[]> OnInventoryUiWeaponsUpdateRequested;
 		public event Action<float> OnHealthUiUpdateRequested;
+		public event Action<int> OnCurrentAmountOfAmmoUiUpdateRequested;
 	}
 }

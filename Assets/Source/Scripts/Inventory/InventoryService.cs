@@ -25,6 +25,11 @@ namespace Candy.Inventory
 			_currentAmountOfAmmunition = new int[inventoryConfig.AmountOfWeapons];
 		}
 
+		private void Start()
+		{
+			OnWeaponsUpdated?.Invoke(_currentWeapons);
+		}
+
 		public void PickUpWeapon(int weaponId)
 		{
 			_hasWeapons = true;
@@ -84,6 +89,9 @@ namespace Candy.Inventory
 
 		public int GetAmountOfAmmunition(int weaponId)
 		{
+			if (weaponId < 0)
+				return -1;
+			
 			return _currentAmountOfAmmunition[weaponId];
 		}
 	}

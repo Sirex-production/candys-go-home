@@ -20,6 +20,7 @@ namespace Candy.Gunplay
 		private bool _isHoldingMelee = false;
 		private float _secondsPassedFromLastAttack = 0f;
 
+		public int CurrentWeaponIndex => _isHoldingMelee ? -1 : _currentWeaponIndex;
 		public bool IsAbleToAttack
 		{
 			get => _isAbleToAttack;

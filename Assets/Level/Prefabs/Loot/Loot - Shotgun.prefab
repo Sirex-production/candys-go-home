@@ -179,4 +179,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationDirectionalSpeed: {x: 0, y: 100, z: 0}
   bobbingSpeed: 10
-  bobbingOffset: 0.3
+  bobbingOffset: 0.5

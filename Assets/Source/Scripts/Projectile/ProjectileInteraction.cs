@@ -1,4 +1,5 @@
 ﻿using Candy.Actors;
+using Candy.Player;
 using Candy.VFX;
 using NaughtyAttributes;
 using UnityEngine;
@@ -13,13 +14,15 @@ namespace Candy.Projectile
 		[Required, SerializeField] private ProjectileSubject projectileSubject;
 
 		private IVfxService _vfxService;
+		private IPlayerService _playerService;
 		
 		private bool _isReleasedByPlayer;
 
 		[Inject]
-		private void Construct(IVfxService vfxService)
+		private void Construct(IVfxService vfxService, IPlayerService playerService)
 		{
 			_vfxService = vfxService;
+			_playerService = playerService;
 		}
 
 		private void Awake()
@@ -48,10 +51,7 @@ namespace Candy.Projectile
 
 			if (other.CompareTag("Player") && !_isReleasedByPlayer)
 			{
-				if (other.transform.root.gameObject.TryGetComponent<ActorHealth>(out var healthActor))
-				{
-					healthActor.TakeDamage(projectileSubject.Damage);
-				}
+				_playerService.TakeDamage(projectileSubject.Damage);
 				projectileSubject.InteractWithSurface();
 				return;
 			}

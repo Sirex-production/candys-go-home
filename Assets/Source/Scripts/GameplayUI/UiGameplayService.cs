@@ -9,9 +9,10 @@ namespace Candy.GameplayUi
 {
 	public sealed class UiGameplayService : MonoBehaviour, IUiGameplayService
 	{
-		public event Action<int> OoWeaponSwitchUiUpdateRequested;
+		public event Action<int> OnWeaponSwitchUiUpdateRequested;
 		public event Action<bool[]> OnInventoryUiWeaponsUpdateRequested;
 		public event Action<float> OnHealthUiUpdateRequested;
+		public event Action<int> OnCurrentAmountOfAmmoUiUpdateRequested;
 
 		private IInventoryService _inventoryService;
 		private IGunplayService _gunplayService;
@@ -28,20 +29,44 @@ namespace Candy.GameplayUi
 		private void Awake()
 		{
 			_inventoryService.OnWeaponsUpdated += OnWeaponsUpdated;
+			_inventoryService.OnAmmunitionUpdated += OnAmmunitionUpdated;
 			_gunplayService.OnWeaponSwitched += OnWeaponSwitched;
+			_gunplayService.OnAttackPerformed += OnAttackPerformed;
+			_gunplayService.OnMeleeWeaponSwitched += OnMeleeWeaponSwitched;
 			_playerService.OnHealthUpdated += OnHealthUpdated;
 		}
 
 		private void OnDestroy()
 		{
 			_inventoryService.OnWeaponsUpdated -= OnWeaponsUpdated;
+			_inventoryService.OnAmmunitionUpdated -= OnAmmunitionUpdated;
 			_gunplayService.OnWeaponSwitched -= OnWeaponSwitched;
+			_gunplayService.OnAttackPerformed -= OnAttackPerformed;
+			_gunplayService.OnMeleeWeaponSwitched -= OnMeleeWeaponSwitched;
 			_playerService.OnHealthUpdated -= OnHealthUpdated;
+		}
+
+		private void OnAmmunitionUpdated(int[] _)
+		{
+			OnAttackPerformed(_gunplayService.CurrentWeaponIndex);
+		}
+
+		private void OnMeleeWeaponSwitched()
+		{
+			OnWeaponSwitched(-1);
 		}
 
 		private void OnWeaponSwitched(int weaponIndex)
 		{
-			OoWeaponSwitchUiUpdateRequested?.Invoke(weaponIndex);
+			OnAttackPerformed(weaponIndex);
+			OnWeaponSwitchUiUpdateRequested?.Invoke(weaponIndex);
+		}
+
+		private void OnAttackPerformed(int currentWeaponId)
+		{
+			int currentAmountOfAmmo = _inventoryService.GetAmountOfAmmunition(currentWeaponId);
+			
+			OnCurrentAmountOfAmmoUiUpdateRequested?.Invoke(currentAmountOfAmmo);
 		}
 
 		private void OnWeaponsUpdated(bool[] weapons)
