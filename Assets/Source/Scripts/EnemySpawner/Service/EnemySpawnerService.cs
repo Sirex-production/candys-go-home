@@ -14,7 +14,7 @@ namespace Candy.Spawner.Service
 
         [SerializeField] 
         private EnemyCategoryConfig enemyCategoryConfig;
-        Dictionary<EnemyConfig,ObjectPool<EnemyActor>> _pools = new();
+        Dictionary<int,ObjectPool<EnemyActor>> _pools = new();
 
         private DiContainer _diContainer;
         [Inject]
@@ -45,7 +45,7 @@ namespace Candy.Spawner.Service
                     OnEnemyDestroy
                 );
 				
-                _pools.Add(enemyCategoryConfig.TypeOfEnemies[i].Config,objectPool);
+                _pools.Add(enemyCategoryConfig.TypeOfEnemies[i].Config.ID,objectPool);
             }
            
         }
@@ -80,12 +80,12 @@ namespace Candy.Spawner.Service
         
         public void SpawnEnemy(EnemyActor actor ,Vector3 position)
         {
-            var enemy = _pools[actor.Config].Get();
+            var enemy = _pools[actor.Config.ID].Get();
             enemy.transform.position = position;
         }
         public void ResetEnemy(EnemyActor enemySpawnerData)
         {
-            _pools[enemySpawnerData.Config].Release(enemySpawnerData);
+            _pools[enemySpawnerData.Config.ID].Release(enemySpawnerData);
         }
        
     }

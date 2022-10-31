@@ -2,6 +2,7 @@
 using Candy.Actors;
 using Candy.Projectile;
 using Candy.Spawner.Service;
+using Candy.Wave;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,6 +21,7 @@ namespace Candy.Enemy
         
         private IProjectileService _projectile;
         private IEnemySpawnerService _enemySpawnerService;
+        private IWaveService _waveService;
         
         // -------- components ----------
         [SerializeField] 
@@ -104,9 +106,10 @@ namespace Candy.Enemy
 
             
         [Inject]
-        private void Construct(IProjectileService projectileService, IEnemySpawnerService enemySpawnerService)
+        private void Construct(IProjectileService projectileService, IEnemySpawnerService enemySpawnerService,IWaveService waveService)
         {
             _projectile = projectileService;
+            _waveService = waveService;
             _enemySpawnerService = enemySpawnerService;
             target = enemySpawnerService.GetTarget();
         }
@@ -123,9 +126,10 @@ namespace Candy.Enemy
             };
         }
 
-        public void ReleaseToPool()
+        public void ReleaseToPool(int i)
         {
             _enemySpawnerService.ResetEnemy(this);
+            _waveService.EnemyKilled();
             this.gameObject.SetActive(false);
         }
 

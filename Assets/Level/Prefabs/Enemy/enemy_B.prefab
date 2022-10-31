@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd46f1a36dbc48f3992b22ebeeed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 045d356321fd8204fadff19ed19c9d41, type: 2}
+  config: {fileID: 11400000, guid: 8e718d4ff925db44692a780160871e88, type: 2}
   navMeshAgent: {fileID: 8681629232517040323}
   actorHealth: {fileID: 8681629232517040184}
   behaviorAgent: {fileID: 8681629232517040321}
@@ -486,6 +486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8b86218f57d50e345b5371209d5e04a5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab093f914f2c2b14c89fa6e5a484619c, type: 2}
     - target: {fileID: 919132149155446097, guid: 8b86218f57d50e345b5371209d5e04a5, type: 3}
       propertyPath: m_Name
       value: Stick

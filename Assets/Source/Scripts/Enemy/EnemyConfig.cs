@@ -13,7 +13,8 @@ namespace Candy.Enemy
     {
 
         //--------- Attack ----------
-        
+        [SerializeField] 
+        private int id;
       
         [Header("Attack")]
         [SerializeField] 
@@ -90,7 +91,7 @@ namespace Candy.Enemy
 
         public TypeOfAttack TypeOfAttack => typeOfAttack;
         private bool IsMelee() => TypeOfAttack == TypeOfAttack.Melee;
-        
-        
+
+        public int ID => id;
     }
 }

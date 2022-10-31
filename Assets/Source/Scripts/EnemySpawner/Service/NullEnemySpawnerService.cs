@@ -12,12 +12,12 @@ namespace Candy.Spawner.Service
 
         public void SpawnEnemy(EnemyActor enemySpawnerData, Vector3 position)
         {
-            
+           
         }
 
         public void ResetEnemy(EnemyActor enemySpawnerData)
         {
-             
+            
         }
     }
 }

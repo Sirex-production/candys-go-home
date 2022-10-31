@@ -2,10 +2,12 @@
 using Candy.GameplayUi;
 using Candy.Gunplay;
 using Candy.Inventory;
+using Candy.Menu;
 using Candy.Player;
 using Candy.Projectile;
 using Candy.Spawner.Service;
 using Candy.VFX;
+using Candy.Wave;
 using Support;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +25,9 @@ namespace Candy.Common
 		[SerializeField] private VfxService vfxService;
 		[SerializeField] private PlayerService playerService;
 		[SerializeField] private UiGameplayService uiGameplayService;
+		[SerializeField] private WaveService waveService;
+		[SerializeField] private MainMenuService menuService;
+		
 		
 		public override void InstallBindings()
 		{
@@ -34,6 +39,8 @@ namespace Candy.Common
 			BindService<VfxService, NullVfxService, IVfxService>(vfxService);
 			BindService<PlayerService, NullPlayerService, IPlayerService>(playerService);
 			BindService<UiGameplayService, NullUiGameplayService, IUiGameplayService>(uiGameplayService);
+			BindService<WaveService,NullWaveService,IWaveService>(waveService);
+			BindService<MainMenuService,NullMenuService,IMenuService>(menuService);
 		}
 		
 		private void BindService<TRealImplementation, TNullImplementation, TServiceInterface>(TRealImplementation realImplementation) 

@@ -18,7 +18,7 @@ namespace Candy.Enemy.Logic.States
             enemy.TimeToDie -= Time.deltaTime;
             if (enemy.TimeToDie <= 0) 
             {
-                enemy.ReleaseToPool();
+                enemy.ReleaseToPool(0);
             }
         }
 
