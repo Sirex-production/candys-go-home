@@ -79,5 +79,10 @@ namespace Candy.Inventory
 
 			throw new ApplicationException();
 		}
+
+		public int GetAmountOfAmmunition(int weaponId)
+		{
+			return _currentAmountOfAmmunition[weaponId];
+		}
 	}
 }

@@ -12,5 +12,6 @@ namespace Candy.Inventory
 		public void PickUpWeapon(int weaponId);
 		public void AddAmmunition(int weaponId, int amount);
 		public void WasteAmmunition(int weaponId, int amount);
+		public int GetAmountOfAmmunition(int weaponId);
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using NaughtyAttributes;
-using Support.Input;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -17,11 +16,9 @@ namespace Candy.Projectile
 		private List<IObjectPool<ProjectileSubject>> _projectilesPools;
 		
 		[Inject]
-		private void Construct(DiContainer diContainer, PcInputService pcInputService)
+		private void Construct(DiContainer diContainer)
 		{
 			_diContainer = diContainer;
-			
-			pcInputService.OnAttackInput += () => SpawnProjectile(0, Camera.main.transform.position, Camera.main.transform.forward, true);
 		}
 
 		private void Awake()

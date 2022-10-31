@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020ece98ae9143a69a21e07a5fcdf041, type: 3}
   m_Name: InventoryConfig
   m_EditorClassIdentifier: 
-  amountOfWeapons: 3
+  pauseBetweenMeleeSlashes: 0.3
+  meleeDamage: 0.3
+  weaponData:
+  - pauseBetweenShots: 0.3
+  - pauseBetweenShots: 0.5
+  - pauseBetweenShots: 0.1

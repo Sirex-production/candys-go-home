@@ -20,6 +20,7 @@ namespace Support.Input
         private readonly InputAction _attack;
         private readonly InputAction _nextWeapon;
         private readonly InputAction _previousWeapon;
+        private readonly InputAction _meleeWeapon;
 
         private bool _isEnabled = false;
         
@@ -34,7 +35,7 @@ namespace Support.Input
         /// bool identifies whether next weapon was selected. true - next weapon. false - previous weapon
         /// </summary>
         public event Action<bool> OnWeaponSwitch;
-        public event Action<bool> OnMeleeWeaponSwitch;
+        public event Action OnMeleeWeaponSwitch;
 
         public bool IsEnabled
         {
@@ -64,6 +65,7 @@ namespace Support.Input
             _attack = _pcInputActions.Combat.Attack;
             _nextWeapon = _pcInputActions.Combat.NextWeapon;
             _previousWeapon = _pcInputActions.Combat.PreviousWeapon;
+            _meleeWeapon = _pcInputActions.Combat.MeleeWeaponSwitch;
         }
 
         public void Tick()
@@ -122,6 +124,9 @@ namespace Support.Input
             
             if(_previousWeapon.WasPerformedThisFrame())
                 OnWeaponSwitch?.Invoke(false);
+            
+            if(_meleeWeapon.WasPerformedThisFrame())
+                OnMeleeWeaponSwitch?.Invoke();
         }
     }
 }

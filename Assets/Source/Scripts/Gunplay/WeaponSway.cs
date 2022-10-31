@@ -8,7 +8,7 @@ namespace Candy.Gunplay
 	public sealed class WeaponSway : MonoBehaviour
 	{
 		[BoxGroup("References")]
-		[Required, SerializeField] private Transform weaponOriginTransform;
+		[SerializeField] private Transform[] weaponOriginTransforms;
 		[BoxGroup("Sway properties")]
 		[SerializeField] [Min(0)] private float initialRotationLerpingSpeed;
 		[BoxGroup("Sway properties")]
@@ -16,7 +16,7 @@ namespace Candy.Gunplay
 
 		private PcInputService _pcInputService;
 
-		private Quaternion _initialLocalRotation;
+		private Quaternion[] _initialLocalRotations;
 		
 		[Inject]
 		private void Construct(PcInputService pcInputService)
@@ -26,8 +26,11 @@ namespace Candy.Gunplay
 
 		private void Awake()
 		{
-			_initialLocalRotation = weaponOriginTransform.localRotation;
+			_initialLocalRotations = new Quaternion[weaponOriginTransforms.Length];
 			
+			for (int i = 0; i < weaponOriginTransforms.Length; i++)
+				_initialLocalRotations[i] = weaponOriginTransforms[i].localRotation;
+
 			_pcInputService.OnDeltaRotationInput += OnDeltaRotationInput;
 		}
 
@@ -41,10 +44,13 @@ namespace Candy.Gunplay
 			var rotationAngle = delta * (rotationForce * Time.deltaTime);
 			var horizontalRotationOffset = Quaternion.AngleAxis(rotationAngle.y, Vector3.right);
 			var verticalRotationOffset = Quaternion.AngleAxis(rotationAngle.x, Vector3.forward);
-			var targetLocalRotation = weaponOriginTransform.localRotation * horizontalRotationOffset * verticalRotationOffset;
 
-			weaponOriginTransform.localRotation = targetLocalRotation;
-			weaponOriginTransform.localRotation = Quaternion.Lerp(weaponOriginTransform.localRotation, _initialLocalRotation, initialRotationLerpingSpeed * Time.deltaTime);
+			for (int i = 0; i < weaponOriginTransforms.Length; i++)
+			{
+				var targetLocalRotation = weaponOriginTransforms[i].localRotation * horizontalRotationOffset * verticalRotationOffset;
+				weaponOriginTransforms[i].localRotation = targetLocalRotation;
+				weaponOriginTransforms[i].localRotation = Quaternion.Lerp(weaponOriginTransforms[i].localRotation, _initialLocalRotations[i], initialRotationLerpingSpeed * Time.deltaTime);
+			}
 		}
 	}
 }
