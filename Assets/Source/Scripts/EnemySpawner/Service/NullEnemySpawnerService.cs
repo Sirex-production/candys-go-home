@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Candy.Enemy;
+using UnityEngine;
 
 namespace Candy.Spawner.Service
 {
@@ -9,9 +10,14 @@ namespace Candy.Spawner.Service
             return null;
         }
 
-        public void SpawnEnemy()
+        public void SpawnEnemy(EnemyActor enemySpawnerData, Vector3 position)
         {
-          
+            
+        }
+
+        public void ResetEnemy(EnemyActor enemySpawnerData)
+        {
+             
         }
     }
 }
