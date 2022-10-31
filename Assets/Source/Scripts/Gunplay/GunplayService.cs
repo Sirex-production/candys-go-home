@@ -4,7 +4,7 @@ using Support.Input;
 using UnityEngine;
 using Zenject;
 
-namespace Candy.Player
+namespace Candy.Gunplay
 {
 	public sealed class GunplayService : MonoBehaviour, IGunplayService
 	{
@@ -25,6 +25,11 @@ namespace Candy.Player
 		private void Awake()
 		{
 			_pcInputService.OnWeaponSwitch += OnWeaponSwitch;
+		}
+
+		private void Start()
+		{
+			OnWeaponSwitch(true);
 		}
 
 		private void OnDestroy()

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Candy.Player
+namespace Candy.Gunplay
 {
 	public interface IGunplayService
 	{

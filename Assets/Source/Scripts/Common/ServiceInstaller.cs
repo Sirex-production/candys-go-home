@@ -1,5 +1,5 @@
 ﻿using Candy.Gunplay;
-using Candy.Player;
+using Candy.Inventory;
 using Candy.Projectile;
 using Support;
 using UnityEngine;
@@ -12,11 +12,13 @@ namespace Candy.Common
 	{
 		[SerializeField] private GunplayService gunplayService;
 		[SerializeField] private ProjectileService projectileService;
+		[SerializeField] private InventoryService inventoryService;
 		
 		public override void InstallBindings()
 		{
 			BindService<GunplayService, NullGunplayService, IGunplayService>(gunplayService);
 			BindService<ProjectileService, NullProjectileService, IProjectileService>(projectileService);
+			BindService<InventoryService, NullInventoryService, IInventoryService>(inventoryService);
 		}
 		
 		private void BindService<TRealImplementation, TNullImplementation, TServiceInterface>(TRealImplementation realImplementation) 
