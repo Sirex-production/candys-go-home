@@ -5,19 +5,21 @@ namespace Candy.Enemy
 {
     public sealed class EnemyDetection : MonoBehaviour
     {
-        public event Action OnEnter;
-        public event Action OnExit;
+        private bool _isPlayerDetected;
+
+        public bool IsPlayerDetected => _isPlayerDetected;
+
         private void OnTriggerExit(Collider other)
         {
             if (!other.CompareTag("Player")) return;
-             OnEnter?.Invoke();
+            _isPlayerDetected = false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
-            OnExit?.Invoke();
-            
+            _isPlayerDetected = true;
+
         }
     }
 }

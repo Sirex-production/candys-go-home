@@ -1,17 +1,25 @@
 ﻿using System;
 using Candy.Actors;
+using Candy.Projectile;
+using Candy.Spawner.Service;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
+using Zenject;
 
 namespace Candy.Enemy
 {
     public sealed class EnemyActor : MonoBehaviour
     {
         // -------- data ----------
+        [FormerlySerializedAs("data")]
         [SerializeField] 
         [Required] 
-        private EnemyData data;
+        private EnemyConfig config;
+        
+        private IProjectileService _projectile;
+        private IEnemySpawnerService _enemySpawnerService;
         
         // -------- components ----------
         [SerializeField] 
@@ -21,6 +29,10 @@ namespace Candy.Enemy
         [SerializeField] 
         [Required] 
         private ActorHealth actorHealth;
+
+        [SerializeField] 
+        [Required]
+        private EnemyAttack enemyAttack;
         
         [SerializeField] 
         [Required] 
@@ -29,6 +41,7 @@ namespace Candy.Enemy
         [SerializeField] 
         [Required] 
         private EnemyDetection attackTrigger ;
+        
         
         // -------- detecting ----------
         [SerializeField] 
@@ -41,65 +54,50 @@ namespace Candy.Enemy
         
         [SerializeField] 
         public Transform target;
-
-        private bool _isTargetDetected = false;
-        private bool _isTargetInAttackRange = false;
-       
+        
         // -------- 
-        public EnemyData Data => data;
+        private bool _isDead = false;
+        // --------
+        public EnemyConfig Config => config;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
 
-        public bool IsTargetDetected => _isTargetDetected;
+        public EnemyAttack EnemyAttack => enemyAttack;
 
-        public bool IsTargetInAttackRange => _isTargetInAttackRange;
-
-        private void Awake()
+        public bool IsTargetDetected()
         {
-            detectionTrigger.OnEnter -= DetectTarget;
-            detectionTrigger.OnEnter += DetectTarget;
-            
-            detectionTrigger.OnExit -= UnDetectTarget;
-            detectionTrigger.OnExit+= UnDetectTarget;
-            
-            attackTrigger.OnEnter -= DetectAttackTarget;
-            attackTrigger.OnEnter += DetectAttackTarget;
-            
-            attackTrigger.OnExit -= UnDetectAttackTarget;
-            attackTrigger.OnExit+= UnDetectAttackTarget;
+            var dir = target.position - transform.position;
+            dir.y = 0;
+            var deltaAngle = Vector3.Angle(dir, transform.forward);
+            if (deltaAngle >= config.ConeOfVision || deltaAngle < 0)
+            {
+                return false;
+            }
+            return detectionTrigger.IsPlayerDetected;
+             
         }
 
+        public bool IsTargetInAttackRange => attackTrigger.IsPlayerDetected;
+
+        public ActorHealth ActorHealth => actorHealth;
+
+        public bool IsDead => _isDead;
+
+            
+        [Inject]
+        private void Construct(IProjectileService projectileService, IEnemySpawnerService enemySpawnerService)
+        {
+            _projectile = projectileService;
+            _enemySpawnerService = enemySpawnerService;
+            target = enemySpawnerService.GetTarget();
+        }
+        
         private void Start()
         {
-            actorHealth.InitHealth(data.MaxHealth); 
-            detectionZone.radius = data.ChaseDetectionRange;
-            attackZone.radius = data.AttackDetectionRange;
-
-        }
-
-        private void OnDestroy()
-        {
-            detectionTrigger.OnEnter -= DetectTarget;
-            detectionTrigger.OnExit -= UnDetectTarget;
+            actorHealth.InitHealth(config.MaxHealth); 
+            detectionZone.radius = config.ChaseDetectionRange;
+            attackZone.radius = config.AttackDetectionRange;
             
-            attackTrigger.OnEnter -= DetectAttackTarget;
-            attackTrigger.OnExit -= UnDetectAttackTarget;
-        }
-        //todo write it better
-        private void DetectTarget()
-        {
-            _isTargetDetected = true;
-        }
-        private void UnDetectTarget()
-        {
-            _isTargetDetected = false; 
-        }
-        private void DetectAttackTarget()
-        {
-            _isTargetInAttackRange = true;
-        }
-        private void UnDetectAttackTarget()
-        {
-            _isTargetInAttackRange = false;
+            actorHealth.OnDie += () => _isDead = true;
         }
     }
 }

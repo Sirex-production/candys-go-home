@@ -2,9 +2,15 @@
 
 namespace Candy.Enemy
 {
-    [CreateAssetMenu(menuName = "Enemy/Data")]
-    public sealed class EnemyData : ScriptableObject
+    public enum TypeOfAttack
     {
+        Melee,
+        Ranged
+    }
+    [CreateAssetMenu(menuName = "Enemy/Data")]
+    public sealed class EnemyConfig : ScriptableObject
+    {
+
         //--------- Attack ----------
         [Header("Attack")]
         [SerializeField] 
@@ -23,17 +29,23 @@ namespace Candy.Enemy
         [Min(0)]
         private float attackInterval;
 
+        [SerializeField] 
+        private TypeOfAttack typeOfAttack;
+
         //--------- Detection ----------
         [Header("Detection")]
         [SerializeField] 
         [Min(0)] 
         private float chaseDetectionRange;
         
-        [Header("Detection")]
         [SerializeField] 
         [Min(0)] 
         private float attackDetectionRange;
-        
+
+        [SerializeField] 
+        [Min(0)] 
+        private float coneOfVision;
+
         //--------- Health ----------
         [Header("Health")]
         [SerializeField] 
@@ -62,5 +74,9 @@ namespace Candy.Enemy
         public float ChaseDetectionRange => chaseDetectionRange;
 
         public float AttackDetectionRange => attackDetectionRange;
+        
+        public float ConeOfVision => coneOfVision;
+
+        public TypeOfAttack TypeOfAttack => typeOfAttack;
     }
 }

@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0caeb73e755a422ba748f4ba0ff57094, type: 3}
   m_Name: ChaseState
   m_EditorClassIdentifier: 
+  color: {r: 0.9150943, g: 0.89909375, b: 0.056114297, a: 0}
   decisions:
+  - {fileID: 11400000, guid: 152a8061eaabdb54ab73ac82fe949b65, type: 2}
   - {fileID: 11400000, guid: 450b410b2ae55984e9dab86347a3d808, type: 2}
+  isRestartable: 0
+  isActionBlockable: 0

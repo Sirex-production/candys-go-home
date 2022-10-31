@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3156371c8ae24abb99e197d4c8e81328, type: 3}
   m_Name: AttackState
   m_EditorClassIdentifier: 
+  color: {r: 0.9339623, g: 0.013216423, b: 0.013216423, a: 0}
   decisions:
-  - {fileID: 11400000, guid: bfba21d695632d64393c9a0d640d7b09, type: 2}
+  - {fileID: 11400000, guid: 152a8061eaabdb54ab73ac82fe949b65, type: 2}
+  - {fileID: 11400000, guid: f8f601531f0a247409813b77cdc0b4ae, type: 2}
+  isRestartable: 1
+  isActionBlockable: 1

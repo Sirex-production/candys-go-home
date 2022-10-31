@@ -9,16 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0587ee867a014b29b967b04d32680f6b, type: 3}
-  m_Name: EnemyData
+  m_Script: {fileID: 11500000, guid: c13e6ad0e3f344dfa21878d73cc25c32, type: 3}
+  m_Name: EnemySpawnerDataA
   m_EditorClassIdentifier: 
-  damage: 2
-  attackSpeed: 2
-  attackRange: 8
-  attackInterval: 1.2
-  typeOfAttack: 0
-  chaseDetectionRange: 21
-  attackDetectionRange: 10
-  coneOfVision: 120
-  maxHealth: 5
-  movementSpeed: 5
+  spawnableEnemy: {fileID: 4591464000766775091, guid: 9b51a2e4e4590554680f30911a8cba51, type: 3}
+  timeToSpawn: 3
+  amountOfEnemiesPerSpawn: 2

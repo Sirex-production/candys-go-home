@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0587ee867a014b29b967b04d32680f6b, type: 3}
-  m_Name: EnemyData
+  m_Script: {fileID: 11500000, guid: d49fefbd63be4e038b1cdc1eb7741e0a, type: 3}
+  m_Name: DieState
   m_EditorClassIdentifier: 
-  damage: 2
-  attackSpeed: 2
-  attackRange: 8
-  attackInterval: 1.2
-  typeOfAttack: 0
-  chaseDetectionRange: 21
-  attackDetectionRange: 10
-  coneOfVision: 120
-  maxHealth: 5
-  movementSpeed: 5
+  decisions: []

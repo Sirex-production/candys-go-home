@@ -9,10 +9,7 @@ namespace Candy.Enemy
         [Required]
         private Transform target;
         
-        public void SurroundTarget()
-        {
-            
-        }
+        //public 
         
     }
 }

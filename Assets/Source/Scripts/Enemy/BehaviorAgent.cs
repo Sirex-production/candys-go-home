@@ -23,8 +23,7 @@ namespace Candy.Enemy
             _currentState = startingState;
         }
         
-
-        private void Update()
+        private void FixedUpdate()
         {
             _currentState = _currentState.Tick(actor);
         }

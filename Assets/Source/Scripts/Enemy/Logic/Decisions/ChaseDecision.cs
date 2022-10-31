@@ -9,7 +9,7 @@ namespace Candy.Enemy.Logic.Decisions
     {
         public override bool ShouldChangeState(EnemyActor enemy)
         {
-            return enemy.IsTargetDetected && !enemy.IsTargetInAttackRange;
+            return enemy.IsTargetDetected() && !enemy.IsTargetInAttackRange;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Candy.Inventory;
+﻿using Candy.Actors;
+using Candy.Inventory;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -33,7 +34,10 @@ namespace Candy.Common
 				if (hitCollider.CompareTag("Enemy"))
 				{
 					float meleeDamage = inventoryConfig.MeleeDamage;
-					//TODO - Viktor: Apply enemy damage here
+					if (hitCollider.transform.root.TryGetComponent<ActorHealth>(out var health))
+					{
+						health.TakeDamage(meleeDamage);
+					}
 				}
 
 				_meleeAttackOverlappedSphereBuffer[i] = null;

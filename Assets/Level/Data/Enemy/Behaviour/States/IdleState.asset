@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7ba1381c97469b885ebe0be7e03f40, type: 3}
   m_Name: IdleState
   m_EditorClassIdentifier: 
+  color: {r: 0.9339623, g: 0.885502, b: 0.885502, a: 0}
   decisions:
+  - {fileID: 11400000, guid: 152a8061eaabdb54ab73ac82fe949b65, type: 2}
   - {fileID: 11400000, guid: 450b410b2ae55984e9dab86347a3d808, type: 2}
   - {fileID: 11400000, guid: bfba21d695632d64393c9a0d640d7b09, type: 2}
+  isRestartable: 0
+  isActionBlockable: 0

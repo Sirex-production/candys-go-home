@@ -13,7 +13,8 @@ namespace Candy.Enemy.Logic.States
 
         protected override void ActOnTick(EnemyActor enemy)
         {
-            
+            //todo  animations
+           
         }
 
         protected override void ActonOnFinish(EnemyActor enemy)

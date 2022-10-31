@@ -9,9 +9,10 @@ namespace Candy.Actors
         
         [SerializeField] 
         [Min(0)] private float health;
-        
         public event Action OnDie;
-        
+
+        public float Health => health;
+
         public void InitHealth(float initHealth)
         {
             health = initHealth;

@@ -8,17 +8,20 @@ namespace Candy.Enemy.Logic.States
     {
         protected override void ActonOnStart(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+             
         }
 
         protected override void ActOnTick(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+            var navAgent = enemy.NavMeshAgent;
+            navAgent.SetDestination(enemy.target.position);
+            navAgent.speed = enemy.Config.MovementSpeed;
+            navAgent.isStopped = false;
         }
 
         protected override void ActonOnFinish(EnemyActor enemy)
         {
-            throw new System.NotImplementedException();
+            enemy.NavMeshAgent.isStopped = true;
         }
     }
 }

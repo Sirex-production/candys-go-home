@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d063d96953947419a1f6188a3bfbec9, type: 3}
   m_Name: DebugState
   m_EditorClassIdentifier: 
+  color: {r: 0.7924528, g: 0.16073336, b: 0.7109726, a: 0}
   decisions:
   - {fileID: 11400000, guid: f1f20a944739f694ab780361c6541720, type: 2}
+  isRestartable: 0
+  isActionBlockable: 0
   startingLine: I
   tickLine: hate
-  finishingLine: niggers
+  finishingLine: coding

@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using Candy.Actors;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Candy.Projectile
@@ -34,14 +35,20 @@ namespace Candy.Projectile
 
 			if (other.CompareTag("Player") && !_isReleasedByPlayer)
 			{
-				//TODO - Viktor: Apply player damage here
+				if (other.transform.root.gameObject.TryGetComponent<ActorHealth>(out var healthActor))
+				{
+					healthActor.TakeDamage(projectileSubject.Damage);
+				}
 				projectileSubject.InteractWithSurface();
 				return;
 			}
 
 			if (other.CompareTag("Enemy") &&!_isReleasedByPlayer)
 			{
-				//TODO - Viktor: Apply enemy damage here
+				if (other.transform.root.TryGetComponent<ActorHealth>(out var health))
+				{
+					health.TakeDamage(projectileSubject.Damage);
+				}
 				projectileSubject.InteractWithSurface();
 			}
 		}
