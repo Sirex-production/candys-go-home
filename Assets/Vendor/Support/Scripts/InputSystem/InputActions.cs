@@ -324,6 +324,15 @@ namespace Support.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""140330a3-082c-4b07-984c-2a8962d07bd2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -335,6 +344,17 @@ namespace Support.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Console"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f7391ef-df4f-4f6c-92dd-2e5dac4893e1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -364,6 +384,7 @@ namespace Support.Input
             // Utilities
             m_Utilities = asset.FindActionMap("Utilities", throwIfNotFound: true);
             m_Utilities_Console = m_Utilities.FindAction("Console", throwIfNotFound: true);
+            m_Utilities_Escape = m_Utilities.FindAction("Escape", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -604,11 +625,13 @@ namespace Support.Input
         private readonly InputActionMap m_Utilities;
         private IUtilitiesActions m_UtilitiesActionsCallbackInterface;
         private readonly InputAction m_Utilities_Console;
+        private readonly InputAction m_Utilities_Escape;
         public struct UtilitiesActions
         {
             private @PcInputActions m_Wrapper;
             public UtilitiesActions(@PcInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Console => m_Wrapper.m_Utilities_Console;
+            public InputAction @Escape => m_Wrapper.m_Utilities_Escape;
             public InputActionMap Get() { return m_Wrapper.m_Utilities; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -621,6 +644,9 @@ namespace Support.Input
                     @Console.started -= m_Wrapper.m_UtilitiesActionsCallbackInterface.OnConsole;
                     @Console.performed -= m_Wrapper.m_UtilitiesActionsCallbackInterface.OnConsole;
                     @Console.canceled -= m_Wrapper.m_UtilitiesActionsCallbackInterface.OnConsole;
+                    @Escape.started -= m_Wrapper.m_UtilitiesActionsCallbackInterface.OnEscape;
+                    @Escape.performed -= m_Wrapper.m_UtilitiesActionsCallbackInterface.OnEscape;
+                    @Escape.canceled -= m_Wrapper.m_UtilitiesActionsCallbackInterface.OnEscape;
                 }
                 m_Wrapper.m_UtilitiesActionsCallbackInterface = instance;
                 if (instance != null)
@@ -628,6 +654,9 @@ namespace Support.Input
                     @Console.started += instance.OnConsole;
                     @Console.performed += instance.OnConsole;
                     @Console.canceled += instance.OnConsole;
+                    @Escape.started += instance.OnEscape;
+                    @Escape.performed += instance.OnEscape;
+                    @Escape.canceled += instance.OnEscape;
                 }
             }
         }
@@ -657,6 +686,7 @@ namespace Support.Input
         public interface IUtilitiesActions
         {
             void OnConsole(InputAction.CallbackContext context);
+            void OnEscape(InputAction.CallbackContext context);
         }
     }
 }

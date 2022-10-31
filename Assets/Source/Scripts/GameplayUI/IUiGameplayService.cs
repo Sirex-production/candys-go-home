@@ -8,5 +8,8 @@ namespace Candy.GameplayUi
 		public event Action<bool[]> OnInventoryUiWeaponsUpdateRequested;
 		public event Action<float> OnHealthUiUpdateRequested;
 		public event Action<int> OnCurrentAmountOfAmmoUiUpdateRequested;
+		public event Action OnEscPopupActivenessChange;
+
+		public void ChangeEcsMenuActivity();
 	}
 }
