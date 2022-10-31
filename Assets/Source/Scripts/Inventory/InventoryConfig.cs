@@ -20,5 +20,6 @@ namespace Candy.Inventory
 	public struct WeaponData
 	{
 		public float pauseBetweenShots;
+		public float recoilStrength;
 	}
 }

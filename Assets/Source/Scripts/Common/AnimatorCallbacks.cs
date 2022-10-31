@@ -13,7 +13,7 @@ namespace Candy.Common
 		[BoxGroup("Melee attack properties")]
 		[SerializeField] [Min(0)] private float radius;
 
-		private Collider[] _meleeAttackOverlappedSphereBuffer = new Collider[16];
+		private readonly Collider[] _meleeAttackOverlappedSphereBuffer = new Collider[16];
 		
 		public void DealMeleeDamage()
 		{

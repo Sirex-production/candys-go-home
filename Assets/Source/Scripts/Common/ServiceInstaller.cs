@@ -1,4 +1,5 @@
-﻿using Candy.Gunplay;
+﻿using Candy.CameraWork;
+using Candy.Gunplay;
 using Candy.Inventory;
 using Candy.Projectile;
 using Support;
@@ -13,12 +14,14 @@ namespace Candy.Common
 		[SerializeField] private GunplayService gunplayService;
 		[SerializeField] private ProjectileService projectileService;
 		[SerializeField] private InventoryService inventoryService;
+		[SerializeField] private CameraWorkService cameraWorkService;
 		
 		public override void InstallBindings()
 		{
 			BindService<GunplayService, NullGunplayService, IGunplayService>(gunplayService);
 			BindService<ProjectileService, NullProjectileService, IProjectileService>(projectileService);
 			BindService<InventoryService, NullInventoryService, IInventoryService>(inventoryService);
+			BindService<CameraWorkService, NullCameraService, ICameraWorkService>(cameraWorkService);
 		}
 		
 		private void BindService<TRealImplementation, TNullImplementation, TServiceInterface>(TRealImplementation realImplementation) 
