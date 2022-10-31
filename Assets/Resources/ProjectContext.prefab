@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2244353846433718249}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &432096865
 MonoBehaviour:
@@ -74,7 +74,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2244353846433718249}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &931645121
 MonoBehaviour:
@@ -121,7 +121,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2244353846433718249}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1960815334
 MonoBehaviour:
@@ -137,6 +137,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforeStartLoadingLevel: 1
   delayBeforeFinishLoadingLevel: 1
+--- !u!1 &1700815236015607764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353518146275422752}
+  - component: {fileID: 5272650888613980178}
+  m_Layer: 0
+  m_Name: DI - UiLoadingServiceInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &353518146275422752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700815236015607764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2244353846433718249}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5272650888613980178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700815236015607764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66623961f92943b781b4731be95d8c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiLoadingService: {fileID: 4211201055225524508}
 --- !u!1 &3477295299792682076
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +212,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2859605674605394104}
+  - {fileID: 353518146275422752}
   - {fileID: 432096864}
   - {fileID: 931645120}
   - {fileID: 1960815333}
@@ -189,6 +235,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 4239559790659304003}
+  - {fileID: 5272650888613980178}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -259,7 +306,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6622972719746745810, guid: d17b003444167fa4392bb07dcb97b9a4, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6622972719746745810, guid: d17b003444167fa4392bb07dcb97b9a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -312,3 +359,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6622972719746745810, guid: d17b003444167fa4392bb07dcb97b9a4, type: 3}
   m_PrefabInstance: {fileID: 7032572668782851280}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4211201055225524508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6622972719746745804, guid: d17b003444167fa4392bb07dcb97b9a4, type: 3}
+  m_PrefabInstance: {fileID: 7032572668782851280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe352a893d6a439693e138d1023176ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

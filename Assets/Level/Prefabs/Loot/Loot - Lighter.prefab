@@ -148,6 +148,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7308718804694308083, guid: d7e5663de96a09049a89f3c2d2be2868, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2947538861075970057, guid: d7e5663de96a09049a89f3c2d2be2868, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2947538861075970057, guid: d7e5663de96a09049a89f3c2d2be2868, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -155,6 +163,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d7e5663de96a09049a89f3c2d2be2868, type: 3}
       propertyPath: m_Name
       value: Lighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5008022236170083033, guid: d7e5663de96a09049a89f3c2d2be2868, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e5663de96a09049a89f3c2d2be2868, type: 3}
