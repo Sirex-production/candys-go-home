@@ -31,7 +31,7 @@ namespace Candy.Player
 		[SerializeField] [ReadOnly] private Vector3 _currentOffset;
 		[SerializeField] [ReadOnly] private float _gravityForce;
 		
-		private bool IsGrounded
+		public bool IsGrounded
 		{
 			get
 			{

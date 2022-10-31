@@ -43,7 +43,7 @@ namespace Candy.Projectile
 				return;
 			}
 
-			if (other.CompareTag("Enemy") &&!_isReleasedByPlayer)
+			if (other.CompareTag("Enemy") && _isReleasedByPlayer)
 			{
 				if (other.transform.root.TryGetComponent<ActorHealth>(out var health))
 				{

@@ -70,7 +70,7 @@ namespace Candy.CameraWork
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void PerformBobbing()
 		{
-			if (playerMovement.CurrentOffset.sqrMagnitude < .001f)
+			if (playerMovement.CurrentOffset.sqrMagnitude < .001f || !playerMovement.IsGrounded)
 			{
 				_timeSpentTraveling = 0;
 				_hudVCamTransform.localPosition = Vector3.Lerp(_hudVCamTransform.localPosition, _initialCameraLocalPos, 30f * Time.deltaTime);

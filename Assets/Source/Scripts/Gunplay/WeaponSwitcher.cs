@@ -1,5 +1,4 @@
-﻿using Candy.Player;
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using Support.Extensions;
 using UnityEngine;
 using Zenject;
@@ -12,8 +11,13 @@ namespace Candy.Gunplay
 		[SerializeField] private Transform meleeWeaponTransform;
 		[BoxGroup("References")]
 		[SerializeField] private Transform[] gunTransforms;
+		[BoxGroup("References")]
+		[Required, SerializeField] private Animator hudAnimator;
+		[BoxGroup("Animation preferences")]
+		[SerializeField] [Min(0)] private float delayBeforeSwitchingWeaponModels = .1f;
 		
 		private IGunplayService _gunplayService;
+		private bool _isSwitchingWeapons = false;
 		
 		[Inject]
 		private void Construct(IGunplayService gunplayService)
@@ -34,18 +38,40 @@ namespace Candy.Gunplay
 
 		private void OnWeaponSwitched(int currentWeaponIndex)
 		{
-			meleeWeaponTransform.SetGameObjectInactive();
+			hudAnimator.ResetTrigger("WeaponSwitch");
+			hudAnimator.SetTrigger("WeaponSwitch");
+			_gunplayService.IsAbleToAttack = false;
 			
-			for (int i = 0; i < gunTransforms.Length; i++)
-				gunTransforms[i].gameObject.SetActive(currentWeaponIndex == i);
+			StopAllCoroutines();
+			this.WaitAndDoCoroutine(delayBeforeSwitchingWeaponModels,
+				() =>
+				{
+					meleeWeaponTransform.SetGameObjectInactive();
+			
+					for (int i = 0; i < gunTransforms.Length; i++)
+						gunTransforms[i].gameObject.SetActive(currentWeaponIndex == i);
+					
+					_gunplayService.IsAbleToAttack = true;
+				});
 		}
-		
+
 		private void OnMeleeWeaponSwitched()
 		{
-			foreach (var weaponTransform in gunTransforms)
-				weaponTransform.SetGameObjectInactive();
+			hudAnimator.ResetTrigger("WeaponSwitch");
+			hudAnimator.SetTrigger("WeaponSwitch");
+			_gunplayService.IsAbleToAttack = false;
 
-			meleeWeaponTransform.SetGameObjectActive();
+			StopAllCoroutines();
+			this.WaitAndDoCoroutine(delayBeforeSwitchingWeaponModels,
+				() =>
+				{
+					foreach (var weaponTransform in gunTransforms)
+						weaponTransform.SetGameObjectInactive();
+
+					meleeWeaponTransform.SetGameObjectActive();
+					
+					_gunplayService.IsAbleToAttack = true;
+				});
 		}
 	}
 }

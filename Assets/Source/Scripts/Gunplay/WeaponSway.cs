@@ -43,7 +43,7 @@ namespace Candy.Gunplay
 		{
 			var rotationAngle = delta * (rotationForce * Time.deltaTime);
 			var horizontalRotationOffset = Quaternion.AngleAxis(rotationAngle.y, Vector3.right);
-			var verticalRotationOffset = Quaternion.AngleAxis(rotationAngle.x, Vector3.forward);
+			var verticalRotationOffset = Quaternion.AngleAxis(rotationAngle.x, Vector3.up);
 
 			for (int i = 0; i < weaponOriginTransforms.Length; i++)
 			{
