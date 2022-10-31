@@ -1,10 +1,9 @@
-﻿using Candy.Player;
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using UnityEngine;
 
 namespace Candy.Enemy
 {
-    public class EnemyManagerService: MonoBehaviour, IGunplayService
+    public class EnemyManagerService: MonoBehaviour
     {
         [SerializeField] 
         [Required]
