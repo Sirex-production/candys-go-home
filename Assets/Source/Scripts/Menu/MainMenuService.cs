@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Support;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -16,6 +13,9 @@ namespace Candy.Menu
 
         [SerializeField] private Button startButton;
         [SerializeField] private Button quitButton;
+
+        [SerializeField] private Button level1Button;
+        [SerializeField] private Button level2Button;
         
         private LevelManagementService _levelManagementService;
 
@@ -36,6 +36,9 @@ namespace Candy.Menu
             InitSliders();
             startButton.onClick.AddListener(StartGame);
             quitButton.onClick.AddListener(QuitGame);
+            
+            level1Button.onClick.AddListener(() => _levelManagementService.LoadLevel(1));
+            level2Button.onClick.AddListener(() => _levelManagementService.LoadLevel(3));
         }
         
         public void StartGame()

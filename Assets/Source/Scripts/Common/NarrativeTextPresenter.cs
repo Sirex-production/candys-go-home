@@ -22,12 +22,12 @@ namespace Candy.Common
 		
 		public void PlayerPhrase2()
 		{
-			narrativeText.SpawnTextCoroutine("But not every candy get to the peoples' home! Some of them are thrown to the trash just because they are expired...", .01f);
+			narrativeText.SpawnTextCoroutine("But not every candy get to the humans' home! Some of them are thrown to the trash just because they are expired...", .01f);
 		}
 		
 		public void PlayerPhrase3()
 		{
-			narrativeText.SpawnTextCoroutine("Time to eliminate new sweets and get to the humans home...", .05f);
+			narrativeText.SpawnTextCoroutine("Time to eliminate new sweets and get to the humans' home...", .05f);
 		}
 	}
 }

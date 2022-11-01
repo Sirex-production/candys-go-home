@@ -1,7 +1,9 @@
 ﻿using System;
 using NaughtyAttributes;
+using Support;
 using Support.Extensions;
 using UnityEngine;
+using Zenject;
 
 namespace Candy.Player
 {
@@ -10,11 +12,19 @@ namespace Candy.Player
 		[BoxGroup("Config")]
 		[Required, SerializeField] private PlayerConfig playerConfig;
 
+		private LevelManagementService _levelManagementService;
+		
 		private float _currentHp;
 		
 		public event Action<float> OnCustomJumpRequested;
 		public event Action<float> OnSpeedChangeRequested;
 		public event Action<float> OnHealthUpdated;
+
+		[Inject]
+		private void Construct(LevelManagementService levelManagementService)
+		{
+			_levelManagementService = levelManagementService;
+		}
 
 		private void Awake()
 		{
@@ -43,8 +53,11 @@ namespace Candy.Player
 		{
 			damage = Mathf.Max(0, damage);
 			_currentHp -= damage;
-			
+
 			OnHealthUpdated?.Invoke(Mathf.InverseLerp(0, playerConfig.MaxHp, _currentHp));
+			
+			if (_currentHp < 0) 
+				_levelManagementService.RestartLevel();
 		}
 
 		public void Heal(float health)
