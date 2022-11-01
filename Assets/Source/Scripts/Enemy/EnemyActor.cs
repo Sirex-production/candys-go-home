@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using Candy.Actors;
 using Candy.Projectile;
 using Candy.Spawner.Service;
 using Candy.Wave;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,7 +24,7 @@ namespace Candy.Enemy
         private IProjectileService _projectile;
         private IEnemySpawnerService _enemySpawnerService;
         private IWaveService _waveService;
-        
+
         // -------- components ----------
         [SerializeField] 
         [Required] 
@@ -67,6 +69,8 @@ namespace Candy.Enemy
         private float _timeToDie;
         // -------- 
         private bool _isDead = false;
+
+        private Coroutine _damageCoroutine;
         // --------
         public EnemyConfig Config => config;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
@@ -116,6 +120,7 @@ namespace Candy.Enemy
         
         private void Start()
         {
+            actorHealth.OnTakeDamage += OnHit;
             actorHealth.InitHealth(config.MaxHealth); 
             detectionZone.radius = config.ChaseDetectionRange;
             attackZone.radius = config.AttackDetectionRange;
@@ -126,6 +131,23 @@ namespace Candy.Enemy
             };
         }
 
+        private void OnHit()
+        {
+            if (_damageCoroutine != null)
+            {
+                StopCoroutine(_damageCoroutine);
+            }
+
+            _damageCoroutine = StartCoroutine(ApplyChangeColorOnDamage());
+        }
+
+        private IEnumerator ApplyChangeColorOnDamage()
+        {
+            /*GetComponent<Renderer>().material.DOColor(new Color(1,0,0,0.5),1);
+            yield return new WaitForSeconds(1)*/
+            yield break;
+        }
+        
         public void ReleaseToPool(int i)
         {
             _enemySpawnerService.ResetEnemy(this);

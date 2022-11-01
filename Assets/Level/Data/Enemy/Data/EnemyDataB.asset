@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   attackSpeed: 0.25
-  damage: 3
+  damage: 12
   attackRange: 3
   attackInterval: 0.6
   typeOfAttack: 0

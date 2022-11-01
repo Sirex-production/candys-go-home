@@ -2,6 +2,7 @@
 using Candy.GameplayUi;
 using Candy.Gunplay;
 using Candy.Inventory;
+using Candy.LevelTransition;
 using Candy.LoadingUi;
 using Candy.Menu;
 using Candy.Player;
@@ -29,6 +30,7 @@ namespace Candy.Common
 		[SerializeField] private WaveService waveService;
 		[SerializeField] private MainMenuService menuService;
 		[SerializeField] private UiLoadingService uiLoadingService;
+		[SerializeField] private LevelTransitionService levelTransition;
 		
 		
 		public override void InstallBindings()
@@ -43,6 +45,7 @@ namespace Candy.Common
 			BindService<UiGameplayService, NullUiGameplayService, IUiGameplayService>(uiGameplayService);
 			BindService<WaveService,NullWaveService,IWaveService>(waveService);
 			BindService<MainMenuService,NullMenuService,IMenuService>(menuService);
+			BindService<LevelTransitionService,NullLevelTransitionService,ILevelTransitionService>(levelTransition);
 
 		}
 		

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Candy.Enemy;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Pool;
 using Zenject;
 
@@ -82,6 +83,7 @@ namespace Candy.Spawner.Service
         {
             var enemy = _pools[actor.Config.ID].Get();
             enemy.transform.position = position;
+            enemy.GetComponent<NavMeshAgent>().Warp(enemy.transform.position);
         }
         public void ResetEnemy(EnemyActor enemySpawnerData)
         {

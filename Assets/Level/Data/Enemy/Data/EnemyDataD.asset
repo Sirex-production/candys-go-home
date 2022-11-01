@@ -15,11 +15,11 @@ MonoBehaviour:
   id: 3
   attackSpeed: 0.25
   damage: 3
-  attackRange: 12
+  attackRange: 13
   attackInterval: 0.7
   typeOfAttack: 1
   chaseDetectionRange: 18
-  attackDetectionRange: 15
+  attackDetectionRange: 11
   coneOfVision: 240
   maxHealth: 18
   timeToDie: 0.5

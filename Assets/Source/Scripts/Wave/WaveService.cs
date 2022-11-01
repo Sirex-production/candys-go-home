@@ -20,7 +20,10 @@ namespace Candy.Wave
         private int additionalNumberOfEnemiesPerWave = 4;
 
         [SerializeField] private EnemyCategoryConfig categoryConfig;
+        [SerializeField] private int wavesToClear = 5 ;
+        public event Action OnStageFinish;
 
+        private bool _shouldBeBlocked = false;
         private float respawnInterval = 3f;
         private float currentRespawnInterval = 0f;
         public event Action OnNextWave;
@@ -50,9 +53,19 @@ namespace Candy.Wave
 
         private void Update()
         {
+            if (_shouldBeBlocked)
+            {
+                return;
+            }
             //next wave
             if (_enemiesLeft<=0 && _currentSpawnedEnemies >= numberOfEnemies)
             {
+                if (_waveNumber >= wavesToClear)
+                {
+                    _shouldBeBlocked = true;
+                    OnStageFinish?.Invoke();
+                    return;
+                }
                 PerformNextWave();
             }
             Debug.Log($"{_currentSpawnedEnemies} {numberOfEnemies}");
