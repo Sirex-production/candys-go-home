@@ -63,14 +63,16 @@ namespace Candy.Wave
             
             currentRespawnInterval += Time.deltaTime;
             _time += Time.deltaTime;
-            if (!(currentRespawnInterval >= respawnInterval)) return;
-            
-            currentRespawnInterval = 0;
             
             if (_time>= secondsLeft)
             {
                 OnStageFinish?.Invoke();
             }
+            
+            if (!(currentRespawnInterval >= respawnInterval)) return;
+            currentRespawnInterval = 0;
+            
+          
 
             /*if (_shouldBeBlocked)
             {
