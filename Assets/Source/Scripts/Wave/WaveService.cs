@@ -71,7 +71,7 @@ namespace Candy.Wave
             
             if (!(currentRespawnInterval >= respawnInterval)) return;
             currentRespawnInterval = 0;
-            
+            spawners[Random.Range(0,spawners.Count)].SpawnEnemy(categoryConfig.TypeOfEnemies[Random.Range(0,categoryConfig.TypeOfEnemies.Count)]);
           
 
             /*if (_shouldBeBlocked)
@@ -101,7 +101,7 @@ namespace Candy.Wave
             
             currentRespawnInterval = 0;
             //spawn
-            spawners[Random.Range(0,spawners.Count)].SpawnEnemy(categoryConfig.TypeOfEnemies[Random.Range(0,categoryConfig.TypeOfEnemies.Count)]);
+          
             _currentSpawnedEnemies++;
             _enemiesLeft++;*/
 
