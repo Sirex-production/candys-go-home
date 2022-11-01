@@ -14,7 +14,7 @@ namespace Candy.LevelTransition
 
         [SerializeField] private WaveService waveService;
         private LevelManagementService _levelManagementService;
-        //private WaveService _waveService;
+      
         [Inject]
         private void Construct(LevelManagementService levelManagementService)
         {
@@ -29,17 +29,14 @@ namespace Candy.LevelTransition
 
         private void FinishLevel()
         {
-            
-            Debug.Log(1);
             _levelManagementService.LoadLevel(nextSceneId);
-            //StartCoroutine(FinishLevelCoroutine());
         }
 
         IEnumerator FinishLevelCoroutine()
         {
             yield break;
            
-            //_levelManagementService.LoadLevel(nextSceneId);
+            
         }
     }
 }

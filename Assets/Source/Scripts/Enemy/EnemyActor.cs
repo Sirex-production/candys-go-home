@@ -148,10 +148,10 @@ namespace Candy.Enemy
             yield break;
         }
         
-        public void ReleaseToPool(int i)
+        public void ReleaseToPool()
         {
-            _enemySpawnerService.ResetEnemy(this);
             _waveService.EnemyKilled();
+            _enemySpawnerService.ResetEnemy(this);
             this.gameObject.SetActive(false);
         }
 
