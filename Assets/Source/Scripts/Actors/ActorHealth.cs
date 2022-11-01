@@ -10,7 +10,7 @@ namespace Candy.Actors
         [SerializeField] 
         [Min(0)] private float health;
         public event Action OnDie;
-
+        public event Action OnTakeDamage;
         public float Health => health;
 
         public void InitHealth(float initHealth)
@@ -21,6 +21,7 @@ namespace Candy.Actors
         public void TakeDamage(float dmg)
         {
             health -= dmg;
+            OnTakeDamage?.Invoke();
             if (health <= HEALTH_THRESHOLD )
             {
                 OnDie?.Invoke();
