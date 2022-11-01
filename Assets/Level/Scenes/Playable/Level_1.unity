@@ -5148,7 +5148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506577150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -149.29, y: 10.09, z: 13.07}
+  m_LocalPosition: {x: -146, y: 10.09, z: 13.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5676,7 +5676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e0b763381249afbf354ef127101ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneId: 2
+  nextSceneId: 3
   waveService: {fileID: 1647909835}
 --- !u!4 &553279459
 Transform:
@@ -12491,7 +12491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159585699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -167.61, y: 2.39, z: 12.1}
+  m_LocalPosition: {x: -167.61, y: 1.695, z: 12.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16892,6 +16892,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5726744159595953228, guid: 87a154a7b8289bb489b9e8f8cd2d6784, type: 3}
+      propertyPath: wavesToClear
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726744159595953228, guid: 87a154a7b8289bb489b9e8f8cd2d6784, type: 3}
+      propertyPath: numberOfEnemies
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726744159595953228, guid: 87a154a7b8289bb489b9e8f8cd2d6784, type: 3}
       propertyPath: spawners.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -16915,6 +16923,10 @@ PrefabInstance:
       propertyPath: spawners.Array.data[4]
       value: 
       objectReference: {fileID: 914520908}
+    - target: {fileID: 5726744159595953228, guid: 87a154a7b8289bb489b9e8f8cd2d6784, type: 3}
+      propertyPath: additionalNumberOfEnemiesPerWave
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5726744159595953229, guid: 87a154a7b8289bb489b9e8f8cd2d6784, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -22261,7 +22273,7 @@ MonoBehaviour:
   waveService: {fileID: 1647909835}
   menuService: {fileID: 0}
   uiLoadingService: {fileID: 0}
-  levelTransition: {fileID: 0}
+  levelTransition: {fileID: 553279458}
 --- !u!4 &2097322966
 Transform:
   m_ObjectHideFlags: 0
