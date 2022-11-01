@@ -1,7 +1,10 @@
 ﻿using Candy.Actors;
 using Candy.Inventory;
 using NaughtyAttributes;
+using Support;
+using Support.Extensions;
 using UnityEngine;
+using Zenject;
 
 namespace Candy.Common
 {
@@ -14,8 +17,16 @@ namespace Candy.Common
 		[BoxGroup("Melee attack properties")]
 		[SerializeField] [Min(0)] private float radius;
 
-		private readonly Collider[] _meleeAttackOverlappedSphereBuffer = new Collider[16];
+		private LevelManagementService _levelManagementService;
 		
+		private readonly Collider[] _meleeAttackOverlappedSphereBuffer = new Collider[16];
+
+		[Inject]
+		private void Construct(LevelManagementService levelManagementService)
+		{
+			_levelManagementService = levelManagementService;
+		}
+
 		public void DealMeleeDamage()
 		{
 			var targetAttackSphereCenter = meleeAttackOrigin.position + meleeAttackOrigin.forward * radius;
@@ -42,6 +53,31 @@ namespace Candy.Common
 
 				_meleeAttackOverlappedSphereBuffer[i] = null;
 			}
+		}
+
+		public void PlayTextEntry0()
+		{
+			NarrativeTextPresenter.Instance.PlayerPhrase0();
+		}
+		
+		public void PlayTextEntry1()
+		{
+			NarrativeTextPresenter.Instance.PlayerPhrase1();
+		}
+		
+		public void PlayTextEntry2()
+		{
+			NarrativeTextPresenter.Instance.PlayerPhrase2();
+		}
+		
+		public void PlayTextEntry3()
+		{
+			NarrativeTextPresenter.Instance.PlayerPhrase3();
+		}
+
+		public void LoadFirstLevel()
+		{
+			_levelManagementService.LoadLevel(2);
 		}
 
 		private void OnDrawGizmos()
