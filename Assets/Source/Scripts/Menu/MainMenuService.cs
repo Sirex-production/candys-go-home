@@ -19,14 +19,14 @@ namespace Candy.Menu
         
         private LevelManagementService _levelManagementService;
 
-        private float _minSensitivity =0.01f;
+        private float _minSensitivity = 0.01f;
         private float _maxSensitivity = 2;
+        
         [Inject]
         private void Construct(LevelManagementService levelManagementService)
         {
             _levelManagementService = levelManagementService;
         }
-        
         
         public event Action OnGameStart;
         public event Action OnApplicationQuite;
@@ -53,13 +53,21 @@ namespace Candy.Menu
             OnApplicationQuite?.Invoke();
             Application.Quit();
         }
+        
         private void InitSliders()
         {
-            var sens = PlayerPrefs.GetFloat("sensitivity", sensitivitySlider.maxValue / 2);
-            var audio = PlayerPrefs.GetFloat("audio", soundSlider.maxValue / 2);
-
-            sensitivitySlider.value = sens;
-            soundSlider.value = audio;
+            try
+            {
+                var sens = PlayerPrefs.GetFloat("sensitivity", sensitivitySlider.maxValue / 2);
+                var audio = PlayerPrefs.GetFloat("audio", soundSlider.maxValue / 2);
+                
+                sensitivitySlider.value = sens;
+                soundSlider.value = audio;
+            }
+            catch (Exception e)
+            {
+                SaveSlidersValue();
+            }
         }
 
         private void SaveSlidersValue()
