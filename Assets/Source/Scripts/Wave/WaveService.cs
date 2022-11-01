@@ -37,6 +37,8 @@ namespace Candy.Wave
         private int _enemiesLeft = 0;
         private float _time = 0;
         private Coroutine _coroutine;
+        
+        
         private void Start()
         {
             _enemiesLeft = FindObjectsOfType<EnemyActor>().Length;
@@ -60,13 +62,15 @@ namespace Candy.Wave
         
         private void Update()
         {
-            
+            if (_shouldBeBlocked) return;
             currentRespawnInterval += Time.deltaTime;
             _time += Time.deltaTime;
             
             if (_time>= secondsLeft)
             {
                 OnStageFinish?.Invoke();
+                _shouldBeBlocked = true;
+                return;
             }
             
             if (!(currentRespawnInterval >= respawnInterval)) return;
