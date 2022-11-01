@@ -15,8 +15,16 @@ MonoBehaviour:
   audioClips:
     m_keys:
     - Default
+    - music
     m_values:
     - audioClip: {fileID: 8300000, guid: 642ec43229c19eb4d895da907328df17, type: 3}
+      priority: 128
+      volume: 1
+      pitch: 1
+      sterioPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+    - audioClip: {fileID: 8300000, guid: 40ad8b015394f264985c3fa6aa01e8b5, type: 3}
       priority: 128
       volume: 1
       pitch: 1
